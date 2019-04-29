@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management</title>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/fonts/themify/themify-icons.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/fonts/elegant-font/html-css/style.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../public/vendor/slick/slick.css">
+    <!--===============================================================================================-->
+
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/util.css">
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/main.css">
+
+    <link type="text/css" rel="stylesheet" href="../public/vendor/bootstrap/css/bootstrap(signup).css">
+    <link type="text/css" rel="stylesheet" href="../public/vendor/bootstrap/css/bootstrap-theme.css">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <header class="header1">
+        <!-- Header desktop -->
+        <div class="container-menu-header">
+            <div class="topbar">
+                <div class="topbar-social">
+                    <a href="https://www.facebook.com/Dc.Koool" class="topbar-social-item fa fa-facebook"></a>
+                    <a href="https://www.instagram.com/dckoool/" class="topbar-social-item fa fa-instagram"></a>
+                    <a href="https://www.pinterest.com/" class="topbar-social-item fa fa-pinterest-p"></a>
+                    <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+                </div>
+
+                <span class="topbar-child1">
+                        Miễn phí vận chuyển với đơn hàng trên 500k
+                    </span>
+
+                <div class="topbar-child2">
+                        <span class="topbar-email">
+                            support@cccstore.tk
+                        </span>
+                </div>
+            </div>
+
+            <div class="wrap_header">
+                <!-- Logo -->
+                <a href="/" class="logo">
+                    <img src="../public/images/icons/lg.png" alt="IMG-LOGO">
+                </a>
+
+                <!-- Menu -->
+                <div class="wrap_menu">
+                    <nav class="menu">
+                        <ul class="main_menu">
+                            <li class="active">
+                                <a href="youtube.com">Trang chủ</a>
+                            </li>
+                            <li class="active">
+                                <a href="/" >Sản Phẩm</a>
+                            </li>
+
+                            <li>
+                                <a href="/cart">Hóa đơn</a>
+                            </li>
+
+                            <li>
+                                <a href="youtube.com">Khách hàng</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Header Icon -->
+                <div class="header-icons">
+                    <div hidden="" id="thongtinKH" class="header-wrapicon2">
+                        <img src="../public/images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-txt">
+                                        <a id="tenKH" class="header-cart-item-name font-weight-bold text-danger">
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-txt">
+                                        <a id="emailKH" class="header-cart-item-name">
+                                            cuongfpi1313131@gmail.com
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-txt">
+                                        <a id="sdtKH" class="header-cart-item-name">
+                                            0987767216
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="logout" class="flex-c-m size1 bg1 bo-rad-15 hov1 s-text1 trans-0-4">
+                                        <button onclick="dx()">Đăng xuất</button>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btndangnhap" class="header-wrapicon1 dis-block">
+                        <a href="login">
+                            <img src="../public/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                        </a>
+                    </button>
+
+                    <span class="linedivide1"></span>
+
+                    <div class="header-wrapicon2">
+                        <a href="cart"><img src="../public/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
+                        <span class="header-icons-noti" id="cart-noti">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container-fluid" style="padding: 2%">
+
+        <div class="col-xs-12" style="padding-bottom: 2%">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default">Thêm</button>
+                <button type="button" class="btn btn-default">Sửa</button>
+                <button type="button" class="btn btn-default">Xóa</button>
+                <button type="button" class="btn btn-info">Lưu</button>
+            </div>
+        </div>
+
+        <div class="col-xs-12 border border-primary">
+            <form class="col-xs-5">
+            <div class="form-row col-xs-4">
+                <label>ID: </label>
+                <input id="name" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-8">
+                <label>Tên khách hàng: </label>
+                <input id="name" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-4">
+                <label>Tài khoản: </label>
+                <input id="name" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-4">
+                <label>Ngày mua:</label>
+                <input id="name" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-4">
+                <label>Tổng tiền: </label>
+                <input id="name" readonly type="text" class="form-control">
+            </div>
+        </form>
+        
+        <div class="col-xs-7">
+            <label>Danh sách các sản phẩm: </label>
+            <table id="example1" class="table table-bordered">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tên sản phẩm</th>   
+                <th>Nhà cung cấp</th> 
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>03</td>
+                <td>Trần Hùng Cường</td>
+                <td>21/09/1997</td>
+                <td>Mrs</td>                  
+                <td>099621504</td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>Trần Đình Chiến</td>
+                <td>26/03/1997</td>
+                <td>Mr</td>                  
+                <td>0977621504</td>             
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>Trần Hùng Cường</td>
+                <td>21/09/1997</td>
+                <td>Mrs</td>                  
+                <td>099621504</td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>Trần Đình Chiến</td>
+                <td>26/03/1997</td>
+                <td>Mr</td>                  
+                <td>0977621504</td>             
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>Trần Hùng Cường</td>
+                <td>21/09/1997</td>
+                <td>Mrs</td>                  
+                <td>099621504</td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>Trần Đình Chiến</td>
+                <td>26/03/1997</td>
+                <td>Mr</td>                  
+                <td>0977621504</td>             
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        </div>
+
+        <div class="col-xs-12" style="margin-top: 2%">
+            <table id="example1" class="table table-bordered">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tài khoản</th>    
+                <th>Tên khách hàng</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Tổng tiền</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>01</td>
+                <td>Trần Đình Chiến</td>
+                <td>26/03/1997</td>
+                <td>Mr</td>                  
+                <td>0977621504</td>             
+                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
+              </tr>
+              <tr >      
+                <td>02</td>
+                <td>Nguyễn Đình Chiến</td>
+                <td>26/03/1999</td>
+                <td>Mr</td>                  
+                <td>0977141504</td>
+                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
+              </tr>
+              <tr>
+                
+                <td>03</td>
+                <td>Trần Hùng Cường</td>
+                <td>21/09/1997</td>
+                <td>Mrs</td>                  
+                <td>099621504</td>
+                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>Trần Đình Chiến</td>
+                <td>26/03/1997</td>
+                <td>Mr</td>                  
+                <td>0977621504</td>             
+                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>ID</th>
+                <th>Tài khoản</th>    
+                <th>Tên khách hàng</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Tổng tiền</th>
+              </tr>
+              </tfoot>
+            </table>
+        </div>
+    </div>
+    
+      <!-- /.box-body -->
+
+
+<footer class="bg6 p-t-10 p-b-10 p-l-10 p-r-10">
+    <div class="t-center p-l-15 p-r-15">
+        <div class="t-center s-text8 p-t-20">
+            Copyright © 2018 All rights reserved. | From CCC with <i class="fa fa-heart-o" aria-hidden="true"></i>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../public/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" src="../public/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" src="../public/vendor/bootstrap/js/popper.js"></script>
+<script type="text/javascript" src="../public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" src="../public/vendor/select2/select2.min.js"></script>
+
+<script src="../public/javascripts/main.js"></script>
+</body>
+</html>

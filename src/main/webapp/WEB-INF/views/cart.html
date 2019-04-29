@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cart</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-signin-client_id" content="1082298468320-93vqqs6ngqpg7h2vkojdhdas0ir3jt8p.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../public/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/fonts/themify/themify-icons.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/fonts/elegant-font/html-css/style.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/util.css">
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/main.css">
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			<div class="topbar">
+				<div class="topbar-social">
+					<a href="https://www.facebook.com/Dc.Koool" class="topbar-social-item fa fa-facebook"></a>
+					<a href="https://www.instagram.com/dckoool/" class="topbar-social-item fa fa-instagram"></a>
+					<a href="https://www.pinterest.com/" class="topbar-social-item fa fa-pinterest-p"></a>
+					<a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+				</div>
+
+				<span class="topbar-child1" id="testttt">
+					Miễn phí vận chuyển với đơn hàng trên 500k
+				</span>
+
+				<div class="topbar-child2">
+					<span class="topbar-email">
+						support@cccstore.tk
+					</span>
+				</div>
+			</div>
+
+			<div class="wrap_header">
+				<!-- Logo -->
+				<a href="/" class="logo">
+					<img src="../public/images/icons/lg.png" alt="IMG-LOGO">
+				</a>
+
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+								<a href="/">Trang chủ</a>
+							</li>
+
+							<li>
+								<a href="/cart">Giỏ hàng</a>
+							</li>
+
+							<li>
+								<a href="https://www.facebook.com/">Liên hệ</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+
+					<div hidden="" id="thongtinKH" class="header-wrapicon2">
+						<img src="../public/images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="tenKH" class="header-cart-item-name font-weight-bold text-danger">
+                                        </a>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="emailKH" class="header-cart-item-name">
+											cuongfpi1313131@gmail.com
+										</a>
+									</div>
+								</li>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="sdtKH" class="header-cart-item-name">
+											0987767216
+										</a>
+									</div>
+								</li>
+							</ul>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="logout" class="flex-c-m size1 bg1 bo-rad-15 hov1 s-text1 trans-0-4">
+										<button onclick="dx()">Đăng xuất</button>
+									</a>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<button id="btndangnhap" class="header-wrapicon1 dis-block">
+						<a href="login">
+							<img src="../public/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+						</a>
+					</button>
+
+					<span class="linedivide1"></span>
+
+					<div class="header-wrapicon2">
+						<a href="cart"><img src="../public/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
+						<span class="header-icons-noti" id="cart-noti">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+	<!-- Title Page -->
+	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url('../public/images/banner1.jpg')">
+		<h2 class="l-text2 t-center">
+			Giỏ hàng của bạn
+		</h2>
+	</section>
+
+	<!-- Cart -->
+	<section class="cart bgwhite p-t-70 p-b-100">
+		<div class="container">
+			<!-- Cart item -->
+			<div class="container-table-cart pos-relative">
+				<div class="wrap-table-shopping-cart bgwhite">
+					<table class="table-shopping-cart">
+						<tr class="table-head">
+							<th class="column-1">Hình</th>
+							<th class="column-2">Sản phẩm</th>
+							<th class="column-3">Giá</th>
+							<th class="column-4 p-l-70">Số lượng</th>
+							<th class="column-5">Thành tiền</th>
+						</tr>
+						<!--item trong giỏi hàng-->
+						<tr class="table-row" id="rowstart" hidden>
+							<td class="column-1" >
+								<div class="cart-img-product b-rad-4 o-f-hidden">
+									<img class="imge" id="idimg1" src="#" alt="IMG-PRODUCT">
+								</div>
+							</td>
+							<td class="column-2" id="idsp1">Mug Adventure</td>
+							<td class="column-3" id="idgiasp1">$16.00</td>
+							<td class="column-4">
+								<div class="flex-w bo5 of-hidden w-size17">
+									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+									</button>
+
+									<input id="sl_sp_1" class="size8 m-text18 t-center num-product" type="number" name="num-product2" value="1">
+
+									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+									</button>
+								</div>
+							</td>
+							<td id="tt_sp_1" class="column-5">$16.00</td>
+							<td id="'btn-light" class="column-6 btn-light">Xóa</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!-- Total -->
+			<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+				<h5 class="m-text20 p-b-24">
+					Mua
+				</h5>
+
+				<!--  -->
+				<div class="flex-w flex-sb-m p-b-12">
+					<span class="s-text18 w-size19 w-full-sm">
+						Tổng tiền:
+					</span>
+
+					<span class="m-text21 w-size20 w-full-sm" id="tongcart">
+						2 tỷ vnd
+					</span>
+				</div>
+
+				<div class="size15 trans-0-4">
+					<!-- Button -->
+					<a id="thanhtoan" href="/login">
+						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 pay" onclick="dathang()">
+							Tiến hành đặt hàng
+						</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="bg6 p-t-10 p-b-10 p-l-10 p-r-10">
+		<div class="t-center p-l-15 p-r-15">
+			<div class="t-center s-text8 p-t-20">
+				Copyright © 2018 All rights reserved. | From CCC with <i class="fa fa-heart-o" aria-hidden="true"></i>
+			</div>
+		</div>
+        <p id="islogin" hidden>0</p>
+        <p id="slsp" hidden>0</p>
+	</footer>
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+	</div>
+
+	<!-- Container Selection -->
+	<div id="dropDownSelect1"></div>
+	<div id="dropDownSelect2"></div>
+
+<!--===============================================================================================-->
+	<script type="text/javascript" src="../public/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="../public/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="../public/vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript" src="../public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="../public/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript">
+		$(".selection-1").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect2')
+		});
+	</script>
+	<script type="text/javascript">
+        if($('#islogin').text()=='1') {
+            var count =1;
+            if(localStorage.length>0){
+                <!--Hiện Row start-->
+                $('#rowstart').removeAttr('hidden');
+            }
+            for (var i=0; i<localStorage.length; ++i) {
+
+                //tạo thêm row
+                if (count != 1)
+                {
+                    var Newrow = $('#rowstart').clone();
+                    Newrow.removeAttr('id');
+                    Newrow.find('#idimg1').attr('id','idimg'+count);
+                    Newrow.find('#idsp1').attr('id','idsp'+count);
+                    Newrow.find('#idgiasp1').attr('id','idgiasp'+count);
+                    Newrow.find('#tt_sp_1').attr('id','tt_sp_'+count);
+                    Newrow.find('#sl_sp_1').attr('id','sl_sp_'+count);
+                    Newrow.appendTo('.table-shopping-cart');
+                }
+                var Key = localStorage.key(i);
+                var gia = parseInt(JSON.parse(localStorage.getItem(Key)).price);
+                document.getElementById('cart-noti').innerHTML=localStorage.length;
+                document.getElementById('idsp'+count).innerHTML  = JSON.parse(localStorage.getItem(Key)).name;
+                document.getElementById('idgiasp'+count).innerHTML  = gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" VNĐ";
+                document.getElementById('idimg' + count).src = JSON.parse(localStorage.getItem(Key)).image;
+                document.getElementById('sl_sp_'+count).setAttribute('value',Number(JSON.parse(localStorage.getItem(Key)).sl));
+                var tt = gia * document.getElementById('sl_sp_'+count).getAttribute('value');
+                document.getElementById('tt_sp_'+count).innerHTML = tt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" VNĐ";
+                count++;
+            }
+        }
+		tinh_tong_tien();
+
+		//nút tăng số lượng
+        $('.btn-num-product-up').each(function(){
+                $(this).on('click',function () {
+                    var key = $(this).parent().parent().parent().find('.column-2').html();
+                    for (var i=0, sl=localStorage.length; i<sl; ++i){
+                        if(key == localStorage.key(i)){
+                            let image = JSON.parse(localStorage.getItem(key)).image;
+                            let price = JSON.parse(localStorage.getItem(key)).price;
+                            let soluong = Number(JSON.parse(localStorage.getItem(key)).sl)+1;
+                            var ob =  {'name': key, 'image': image, 'price':price, 'sl':soluong };
+                            localStorage.setItem(key,JSON.stringify(ob));
+                            var tt = price * soluong;
+                            $(this).parent().parent().parent().find('.column-5').text(tt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" VNĐ") ;
+                        }
+                    };
+                    tinh_tong_tien();
+                })
+        });
+
+        //nút giảm số lượng
+        $('.btn-num-product-down').each(function(){
+            $(this).on('click',function () {
+                var key = $(this).parent().parent().parent().find('.column-2').html();
+                for (var i=0, sl=localStorage.length; i<sl; ++i){
+                    if(key == localStorage.key(i)){
+                        let image = JSON.parse(localStorage.getItem(key)).image;
+                        let price = JSON.parse(localStorage.getItem(key)).price;
+                        let soluong = Number(JSON.parse(localStorage.getItem(key)).sl)-1;
+                        //nếu nhỏ hơn 1 thì k cho giảm nữa, để là 1
+                        if (soluong<1)
+                        	soluong=1;
+                        var ob =  {'name': key, 'image': image, 'price':price, 'sl':soluong };
+                        localStorage.setItem(key,JSON.stringify(ob));
+                        var tt = price * soluong;
+                        $(this).parent().parent().parent().find('.column-5').text(tt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" VNĐ") ;
+                    }
+                };
+                tinh_tong_tien();
+            })
+        });
+
+        //nút xóa item trong giỏ
+        $('.btn-light').each(function(){
+            $(this).on('click',function () {
+                var key = $(this).parent().find('.column-2').html();
+                localStorage.removeItem(key);
+                location.reload();
+                tinh_tong_tien();
+            })
+        });
+        //tính tổng tiền
+        function tinh_tong_tien() {
+            var ttt = 0;
+            for (var i=0, sl=localStorage.length; i<sl; ++i){
+                var key = localStorage.key(i);
+                var price = JSON.parse(localStorage.getItem(key)).price;
+                var soluong = JSON.parse(localStorage.getItem(key)).sl;
+                ttt= ttt+ (price*soluong);
+            }
+            document.getElementById('tongcart').innerHTML= ttt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" VNĐ";
+        }
+		//click ra ngoài thì ẩn form đăng nhập
+        window.onclick = function(event) {
+            var modal = document.getElementById('dangnhap');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            var modal2 = document.getElementById('dangky');
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+        function dangky() {
+            //ẩn form đăng nhập
+            var modal = document.getElementById('dangnhap');
+            modal.style.display = "none";
+
+            //hiện form đkí
+            document.getElementById('dangky').style.display='block';
+        }
+    </script>
+	<script>
+        function dx() {
+            for(var i =0 ;i<localStorage.length;i++){
+                var name= encodeURI(localStorage.key(i));
+                var sl = JSON.parse(localStorage.getItem(localStorage.key(i))).sl;
+                document.cookie ='id'+i+'='+JSON.stringify({key :name,val :sl});
+            }
+            localStorage.clear();
+        }
+        function dathang() {
+            var res = document.cookie;
+            var multiple = res.split(";");
+            if(multiple.length>1){
+                for(var i = 0; i < multiple.length; i++) {
+                    document.cookie = 'dh'+i+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+                }
+			}
+            for(var i =0 ;i<localStorage.length;i++){
+                var Key = localStorage.key(i);
+                var ten = JSON.parse(localStorage.getItem(Key)).name;
+                var sl = Number(JSON.parse(localStorage.getItem(Key)).sl);
+                var price = Number(JSON.parse(localStorage.getItem(Key)).price) * sl;
+                var name = encodeURI(ten);
+                document.cookie ='dh'+i+'='+JSON.stringify({dh :name, sl :sl, price:price});
+            }
+        }
+	</script>
+<!--===============================================================================================-->
+	<script src="../public/javascripts/main.js"></script>
+</body>
+</html>
