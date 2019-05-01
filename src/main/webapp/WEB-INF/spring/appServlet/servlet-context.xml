@@ -16,13 +16,15 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/public/**" location="/public/" cache-period="31556926"/>
 
 	<beans:bean id="viewResolver"
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="cacheable" value="false" />
+		<beans:property name="characterEncoding" value="UTF-8" />
+    	<beans:property name="templateMode" value="HTML5" />
 	</beans:bean>
 
 	<beans:bean id="engine"
@@ -34,6 +36,7 @@
 	<beans:bean id=""
 		class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
 		<beans:property name="templateEngine" ref="engine" />
+		<beans:property name="characterEncoding" value="UTF-8"/>
 	</beans:bean>
 
 	<context:component-scan

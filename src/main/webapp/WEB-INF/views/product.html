@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8"/>
 <head>
 	<title>Sản phẩm</title>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="../public/images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" th:href="@{/public/images/icons/favicon.png}"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/bootstrap/css/bootstrap.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/themify/themify-icons.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/themify/themify-icons.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/elegant-font/html-css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/elegant-font/html-css/style.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/animate/animate.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/css-hamburgers/hamburgers.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/animsition/css/animsition.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/select2/select2.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/slick/slick.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/slick/slick.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/noui/nouislider.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/noui/nouislider.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/util.css">
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/stylesheets/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/stylesheets/main.css}">
 </head>
 <body class="animsition">
 
@@ -60,13 +61,17 @@
 			<div class="wrap_header">
 				<!-- Logo -->
 				<a href="/" class="logo">
-					<img src="../public/images/icons/lg.png">
+					<img th:src="@{/public/images/icons/lg.png}">
 				</a>
 
 				<!-- Menu -->
 				<div class="wrap_menu">
 					<nav class="menu">
 						<ul class="main_menu">
+							<li>
+								<a href="/">Tét thử</a>
+							</li>
+
 							<li>
 								<a href="/">Trang chủ</a>
 							</li>
@@ -89,7 +94,7 @@
 				<!-- Header Icon -->
 				<div  class="header-icons">
 					<div hidden="" id="thongtinKH" class="header-wrapicon2">
-						<img src="../public/images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1 js-show-header-dropdown" alt="ICON">
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
@@ -131,14 +136,14 @@
 
 					<button id="btndangnhap" class="header-wrapicon1 dis-block" >
 						<a href="login">
-							<img src="../public/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+							<img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1" alt="ICON">
 						</a>
 					</button>
 
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2">
-						<a href="cart"><img src="../public/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
+						<a href="cart"><img th:src="@{/public/images/icons/icon-header-02.png}" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
 						<span class="header-icons-noti" id="cart-noti">0</span>
 					</div>
 				</div>
@@ -151,7 +156,7 @@
 	<section class="slide1">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1 item1-slick1" style="background-image: url(../public/images/dell2.jpg);">
+				<div class="item-slick1 item1-slick1" th:style="'background-image: url(public/images/dell2.jpg);'">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text2 t-center animated visible-false m-b-15" data-appear="fadeInDown">
 							Máy tính xách tay DELL 15.6 inch dòng inspiron 5000 (màu silver)
@@ -170,7 +175,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1 item2-slick1" style="background-image: url(../public/images/ssd2.jpg);">
+				<div class="item-slick1 item2-slick1" th:style="'background-image: url(public/images/ssd2.jpg);'">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
 							Bạn đã có SSD chưa
@@ -287,7 +292,7 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative">
-									<img class="vcl" src="public/images/item-02.jpg" alt="IMG-PRODUCT" id="img_sp_1">
+									<img class="vcl" th:src="@{public/images/ssd2.jpg}" alt="IMG-PRODUCT" id="img_sp_1">
 
 									<div class="block2-overlay trans-0-4">
 									
@@ -346,14 +351,14 @@
 	<div id="dropDownSelect1"></div>
 	<div id="dropDownSelect2"></div>
 
-	<script type="text/javascript" src="../public/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/jquery/jquery-3.2.1.min.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/animsition/js/animsition.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/animsition/js/animsition.min.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="../public/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/bootstrap/js/popper.js}"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/bootstrap/js/bootstrap.min.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/select2/select2.min.js}"></script>
 	<script type="text/javascript">
 		$(".selection-1").select2({
 			minimumResultsForSearch: 20,
@@ -366,14 +371,14 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/daterangepicker/moment.min.js"></script>
-	<script type="text/javascript" src="../public/vendor/daterangepicker/daterangepicker.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/daterangepicker/moment.min.js}"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/daterangepicker/daterangepicker.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/slick/slick.min.js"></script>
-	<script type="text/javascript" src="../public/javascripts/slick-custom.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/slick/slick.min.js}"></script>
+	<script type="text/javascript" th:src="@{/public/javascripts/slick-custom.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/sweetalert/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/sweetalert/sweetalert.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js}"></script>
 	<script type="text/javascript">
         document.getElementById('cart-noti').innerHTML=localStorage.length;
 
@@ -453,7 +458,7 @@
 	</script>
 
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/noui/nouislider.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/noui/nouislider.min.js}"></script>
 	<script type="text/javascript">
 		/*[ No ui ]
 	    ===========================================================*/
@@ -488,6 +493,6 @@
         }
 	</script>
 <!--===============================================================================================-->
-	<script src="../public/javascripts/main.js"></script>
+	<script th:src="@{/public/javascripts/main.js}"></script>
 </body>
 </html>

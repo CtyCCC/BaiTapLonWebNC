@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Cart</title>
 	<meta charset="UTF-8">
@@ -7,30 +7,30 @@
 	<meta name="google-signin-client_id" content="1082298468320-93vqqs6ngqpg7h2vkojdhdas0ir3jt8p.apps.googleusercontent.com">
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="../public/images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" th:href="@{/public/images/icons/favicon.png}"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/bootstrap/css/bootstrap.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/themify/themify-icons.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/themify/themify-icons.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/fonts/elegant-font/html-css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/fonts/elegant-font/html-css/style.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/animate/animate.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/css-hamburgers/hamburgers.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/animsition/css/animsition.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/select2/select2.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/vendor/slick/slick.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/vendor/slick/slick.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/util.css">
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/stylesheets/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/stylesheets/main.css}">
 </head>
 <body class="animsition">
 	
@@ -244,14 +244,14 @@
 	<div id="dropDownSelect2"></div>
 
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/jquery/jquery-3.2.1.min.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/animsition/js/animsition.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/animsition/js/animsition.min.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="../public/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/bootstrap/js/popper.js}"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/bootstrap/js/bootstrap.min.js}"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="../public/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/vendor/select2/select2.min.js}"></script>
 	<script type="text/javascript">
 		$(".selection-1").select2({
 			minimumResultsForSearch: 20,
@@ -407,6 +407,6 @@
         }
 	</script>
 <!--===============================================================================================-->
-	<script src="../public/javascripts/main.js"></script>
+	<script th:src="@{/public/javascripts/main.js}"></script>
 </body>
 </html>
