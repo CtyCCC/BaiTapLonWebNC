@@ -39,8 +39,8 @@ public class HomeController {
 	
 	@RequestMapping("/product")
 	public String test() {
-		System.out.println("c1"+dao.getAllCar());
-		System.out.println("c2"+dao.getAllCarByIdNSX("AUD"));
+//		System.out.println("c1"+dao.getAllCar());
+//		System.out.println("c2"+dao.getAllCarByIdNSX("AUD"));
 		return "product";
 	}
 	
