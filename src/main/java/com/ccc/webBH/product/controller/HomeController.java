@@ -1,16 +1,22 @@
-package com.ccc.webBH.product;
+package com.ccc.webBH.product.controller;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ccc.webBH.product.dao.ProductDAO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	
+	@Autowired
+	ProductDAO dao;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -33,8 +39,10 @@ public class HomeController {
 	
 	@RequestMapping("/product")
 	public String test() {
+		System.out.println("c1"+dao.getAllCar());
+		System.out.println("c2"+dao.getAllCarByIdNSX("AUD"));
 		return "product";
 	}
 	
-
+	
 }
