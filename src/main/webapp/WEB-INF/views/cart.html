@@ -60,7 +60,7 @@
 			<div class="wrap_header">
 				<!-- Logo -->
 				<a href="/" class="logo">
-					<img src="../public/images/icons/lg.png" alt="IMG-LOGO">
+					<img th:src="@{/public/images/icons/lg.png}" alt="IMG-LOGO">
 				</a>
 
 				<!-- Menu -->
@@ -68,11 +68,11 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="/">Trang chủ</a>
+								<a href="product">Trang chủ</a>
 							</li>
 
 							<li>
-								<a href="/cart">Giỏ hàng</a>
+								<a href="cart">Giỏ hàng</a>
 							</li>
 
 							<li>
@@ -86,7 +86,7 @@
 				<div class="header-icons">
 
 					<div hidden="" id="thongtinKH" class="header-wrapicon2">
-						<img src="../public/images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1 js-show-header-dropdown" alt="ICON">
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
@@ -127,14 +127,14 @@
 
 					<button id="btndangnhap" class="header-wrapicon1 dis-block">
 						<a href="login">
-							<img src="../public/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+							<img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1" alt="ICON">
 						</a>
 					</button>
 
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2">
-						<a href="cart"><img src="../public/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
+						<a href="cart"><img th:src="@{/public/images/icons/icon-header-02.png}" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
 						<span class="header-icons-noti" id="cart-noti">0</span>
 					</div>
 				</div>
@@ -144,7 +144,7 @@
 	</header>
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url('../public/images/banner1.jpg')">
+	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" th:style="'background-image: url(public/images/banner1.jpg)'">
 		<h2 class="l-text2 t-center">
 			Giỏ hàng của bạn
 		</h2>

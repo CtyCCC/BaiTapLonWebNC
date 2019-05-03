@@ -269,6 +269,7 @@
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50" id="boxstart" th:each="cars : ${dsCar}">
 							<!-- Block2 -->
 							<div class="block2">
+								<input type="text" name="" id="idPro" th:value="${cars.idPro}">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative">
 									<img class="vcl" th:src="@{${cars.urlImage}}" alt="IMG-PRODUCT" id="img_sp_1">
 
@@ -367,6 +368,8 @@
 			$(this).on('click', function(){
 			    swal(nameProduct, "Đã thêm vào giỏ hàng !", "success");
                 document.getElementById('cart-noti').innerHTML=Number($('#cart-noti').text())+1;
+                alert($("#idPro").val());
+                sessionStorage.setItem("idPro", $("#idPro").val());
 			});
 		});
 

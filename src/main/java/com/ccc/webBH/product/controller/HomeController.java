@@ -4,11 +4,14 @@ package com.ccc.webBH.product.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,8 @@ import com.ccc.webBH.product.entity.Product;
  * Handles requests for the application home page.
  */
 @Controller
+@Scope("session")
+@Transactional
 public class HomeController {
 	
 	@Autowired
@@ -46,5 +51,12 @@ public class HomeController {
 		model.addAttribute("pro", pr);
 		System.out.println(pr);
 		return "product-detail";
+	}
+	
+	@GetMapping("/cart")
+	public String cart(HttpSession session) {
+		String a = (String) session.getAttribute("idPro");
+		System.out.println(a);
+		return "cart";
 	}
 }

@@ -96,7 +96,9 @@ insert into Product values('C71',N'Bọc volang, bao tay lái Peugeot 5008',2018
 insert into Product values('C72',N'Đệm lưng mát xa điện',2018,N'OEM','Accessories',47,N'Thiết kế với bề mặt nổi với những hạt matxa.Công dụng lưu thông khí huyết, giảm căng thẳng mệt mỏi.Cho những chuyến đi thoải mái, thư giãn.Bảo vệ cột sống và sức khỏe của bạn','public/images/c72.jpg')
 insert into Product values('C73',N'Cảm biến trước, tiến thông minh Steelmate 3108',2018,N'Thanh bình oto','Accessories',550,N'cảm biến mũi xe phía trước Steelmate 3108 sẽ giúp bạn được an toàn hơn rất nhiều','public/images/73.jpg')
 insert into Product values('C74',N'Thiết bị giám sát hành trình AT35',2018,N'Vietmap','Accessories',350,N'Lưu trữ và thiết lập hành trình cho xe','public/images/74.jpg')
-insert into Product values('C75',N'Đèn pha Led nguyên bộ BMW X5 E70 mẫu S',2018,N'BMW','Accessories',116,N'Đèn pha chiếu sáng cho xe','public/images/74.jpg')
+insert into Product values('C75',N'Đèn pha Led nguyên bộ BMW X5 E70 mẫu S',2018,N'BMW','Accessories',116,N'Đèn pha chiếu sáng cho xe','public/images/75.jpg')
+
+
 set dateformat dMy
 
 insert into Orders values ('OD1','ACC1','22/12/2017',770)
