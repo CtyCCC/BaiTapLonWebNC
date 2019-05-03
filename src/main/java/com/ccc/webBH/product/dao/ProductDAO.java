@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.ccc.webBH.product.entity.Car;
+import com.ccc.webBH.product.entity.Product;
 
 @Repository
 public class ProductDAO {
@@ -25,29 +26,38 @@ public class ProductDAO {
 	}
 
 	//Cách 1
-	//Lấy ds tất cả car
-	public List<Car> getAllCar(){
-		String sql = "Select * from Car";
-		return template.query(sql, new RowMapper<Car>() {
-			public Car mapRow(ResultSet rs, int row) throws SQLException {
-				Car c = new Car(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getDouble(5), rs.getString(6), rs.getString(7));
+	//Lấy ds tất cả pro
+	public List<Product> getAllProduct(){
+		String sql = "Select * from Product";
+		return template.query(sql, new RowMapper<Product>() {
+			public Product mapRow(ResultSet rs, int row) throws SQLException {
+				Product c = new Product(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getString(5),rs.getDouble(6), rs.getString(7), rs.getString(8));
 				return c;
 			}
 		});
 	}
 	
 	//Cách 2 (có thể dùng cách này để lấy all và ngược lại)
-	//Lấy ds car theo idNSX
-	public List<Car> getAllCarByIdNSX(String idNSX) {
-        String sql = "Select * from Car where idNSX = ?";
-        List<Map<String, Object>> list = template.queryForList(sql,new Object[] {idNSX});
-        List<Car> ds = new ArrayList<Car>();
+	//Lấy ds pro theo loại
+	public List<Product> getAllProductByType(String type) {
+        String sql = "Select * from Product where typee = ?";
+        List<Map<String, Object>> list = template.queryForList(sql,new Object[] {type});
+        List<Product> ds = new ArrayList<Product>();
         for(int i = 0;i<list.size();i++) {
         	Map<String, Object> m = list.get(i);
-        	Car c = new Car(m.get("idCar")+"",m.get("nameCar")+"",Integer.parseInt(m.get("namSX")+""),m.get("idNSX")+"",Double.parseDouble(m.get("price")+""),m.get("desCar")+"",m.get("urlImage")+"");
+        	Product c = new Product(m.get("idPro")+"",m.get("namePro")+"",Integer.parseInt(m.get("publicationYear")+""),m.get("supplier")+"",m.get("typee")+"",Double.parseDouble(m.get("price")+""),m.get("descriptions")+"",m.get("urlImage")+"");
         	ds.add(c);
         }
         return ds;
     } 
 	
+	public Product getAllProductById(String idPro){
+		String sql = "Select * from Product where idPro = ?";
+		return template.queryForObject(sql,new Object[] {idPro} ,new RowMapper<Product>() {
+			public Product mapRow(ResultSet rs, int row) throws SQLException {
+				Product c = new Product(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getString(5),rs.getDouble(6), rs.getString(7), rs.getString(8));
+				return c;
+			}
+		});
+	}
 }

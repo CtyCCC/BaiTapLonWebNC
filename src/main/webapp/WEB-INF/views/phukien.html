@@ -208,13 +208,13 @@
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="product" class="s-text13 active1">
+								<a href="product" class="s-text13">
 									Ô tô
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="phukien" class="s-text13">
+								<a href="phukien" class="s-text13 active1">
 									Phụ kiện
 								</a>
 							</li>
@@ -266,11 +266,11 @@
 
 					<!-- Product -->
 					<div class="row row_product">
-						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50" id="boxstart" th:each="cars : ${dsCar}">
+						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50" id="boxstart" th:each="pks : ${dsPK}">
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative">
-									<img class="vcl" th:src="@{${cars.urlImage}}" alt="IMG-PRODUCT" id="img_sp_1">
+									<img class="vcl" th:src="@{${pks.urlImage}}" alt="IMG-PRODUCT" id="img_sp_1">
 
 									<div class="block2-overlay trans-0-4">
 									
@@ -285,10 +285,10 @@
 								</div>
 
 								<div class="block2-txt p-t-20">
-									<a th:href="@{/product-detail(idPro=${cars.idPro})}" class="block2-name dis-block s-text3 p-b-5" id="name_sp" th:text="${cars.namePro}">
+									<a th:href="@{/product-detail(idPro=${pks.idPro})}" class="block2-name dis-block s-text3 p-b-5" id="name_sp_1" th:text="${pks.namePro}">
 									</a>
 
-									<span class="block2-price m-text6 p-r-5" id="price_sp_1" aria-valuetext="1" th:text="${cars.price}+' $'">
+									<span class="block2-price m-text6 p-r-5" id="price_sp_1" aria-valuetext="1" th:text="${pks.price}+' $'">
 									</span>
 								</div>
 							</div>

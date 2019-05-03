@@ -142,12 +142,12 @@
 	</header>
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../public/images/banner1.jpg);">
-		<h2 class="l-text2 t-center">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" th:style="'background-image: url(public/images/banner1.jpg);'">
+		<h2 class="l-text2 t-center text-primary">
 			CCC Store
 		</h2>
 		<p class="m-text13 t-center">
-			Linh kiện chính hãng, giá tốt nhất
+			Xe và phụ kiện chính hãng, giá tốt nhất
 		</p>
 	</section>
 
@@ -158,37 +158,26 @@
 			<div class="w-size13 p-t-30 respon5">
 				<div class="wrap-slick3 flex-sb flex-w">
 					<div class="wrap-slick3-dots"></div>
-
-					<div class="slick3">
-						<div class="item-slick3" data-thumb="public/images/thumb-item-01.jpg" id="img_1_1">
-							<div class="wrap-pic-w">
-								<img src="public/images/product-detail-01.jpg" alt="IMG-PRODUCT" id="img_1_2">
-							</div>
-						</div>
-
-						<div class="item-slick3" data-thumb="public/images/thumb-item-02.jpg" id="img_2_1">
-							<div class="wrap-pic-w">
-								<img src="public/images/product-detail-02.jpg" alt="IMG-PRODUCT" id="img_2_2">
-							</div>
-						</div>
-
-						<div class="item-slick3" data-thumb="public/images/thumb-item-03.jpg" id="img_3_1">
-							<div class="wrap-pic-w">
-								<img src="public/images/product-detail-03.jpg" alt="IMG-PRODUCT" id="img_3_2">
-							</div>
-						</div>
+					<div class="wrap-pic-w">
+						<img th:src="@{${pro.urlImage}}" alt="IMG-PRODUCT" id="img_1_2">
 					</div>
 				</div>
 			</div>
 
 			<div class="w-size14 p-t-30 respon5">
-				<h4 class="product-detail-name m-text16 p-b-13" id="name_sp">
-					Boxy T-Shirt with Roll Sleeve Detail
+				<h4 class="product-detail-name m-text17 p-b-13" id="name_sp" th:text="${pro.namePro}">
 				</h4>
+				
+				<label class="m-text19">Supplier: </label>
+				<span class="m-text15" id="supplier_sp" aria-valuetext="1" th:text="${pro.supplier}"></span><br>
 
-				<span class="m-text17" id="price_sp" aria-valuetext="1">
-					$22
-				</span>
+				<label class="m-text19">Publication Year: </label>
+				<span class="m-text15" id="year_sp" aria-valuetext="1" th:text="${pro.publicationYear}"></span><br>
+
+				<label class="m-text19">Price: </label>
+				<span class="m-text16" id="price_sp" aria-valuetext="1" th:text="${pro.price}"></span><br>
+
+				
 
 				<!--  -->
 				<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
@@ -199,8 +188,7 @@
 					</h5>
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
-						<p class="s-text8" id="des">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+						<p class="s-text8" id="des" th:text="${pro.des}">
 						</p>
 					</div>
 				</div>
@@ -276,6 +264,12 @@
 <!--===============================================================================================-->
 	<script type="text/javascript" th:src="@{/public/vendor/sweetalert/sweetalert.min.js}"></script>
 	<script type="text/javascript">
+		$(function () {
+			var price = Math.round($("#price_sp").text());
+			var f = formatNumber(price);
+			$("#price_sp").text(f);
+		});
+
 		$('.block2-btn-addcart').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
 			$(this).on('click', function(){
@@ -355,6 +349,11 @@
             }
             localStorage.clear();
         }
+
+        //Format tiền 
+        function formatNumber(num) {
+		  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+" $"
+		}
 	</script>
 <!--===============================================================================================-->
 	<script th:src="@{/public/javascripts/main.js}"></script>
