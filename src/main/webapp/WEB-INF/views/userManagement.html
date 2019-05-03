@@ -31,7 +31,6 @@
     <link type="text/css" rel="stylesheet" th:href="@{/public/vendor/bootstrap/css/bootstrap(signup).css}">
     <link type="text/css" rel="stylesheet" th:href="@{/public/vendor/bootstrap/css/bootstrap-theme.css}">
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js}"></script>
 </head>
 <body>
     <header class="header1">
@@ -59,7 +58,7 @@
             <div class="wrap_header">
                 <!-- Logo -->
                 <a href="/" class="logo">
-                    <img src="../public/images/icons/lg.png" alt="IMG-LOGO">
+                    <img th:src="@{/public/images/icons/lg.png}" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu -->
@@ -87,7 +86,7 @@
                 <!-- Header Icon -->
                 <div class="header-icons">
                     <div hidden="" id="thongtinKH" class="header-wrapicon2">
-                        <img src="../public/images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <!-- Header cart noti -->
                         <div class="header-cart header-dropdown">
                             <ul class="header-cart-wrapitem">
@@ -128,14 +127,14 @@
 
                     <button id="btndangnhap" class="header-wrapicon1 dis-block">
                         <a href="login">
-                            <img src="../public/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            <img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1" alt="ICON">
                         </a>
                     </button>
 
                     <span class="linedivide1"></span>
 
                     <div class="header-wrapicon2">
-                        <a href="cart"><img src="../public/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
+                        <a href="cart"><img th:src="@{/public/images/icons/icon-header-02.png}" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
                         <span class="header-icons-noti" id="cart-noti">0</span>
                     </div>
                 </div>
@@ -147,98 +146,99 @@
 
         <div class="col-xs-12" style="padding-bottom: 2%">
             <div class="pull-right">
-                <button type="button" class="btn btn-default">Thêm</button>
-                <button type="button" class="btn btn-default">Sửa</button>
-                <button type="button" class="btn btn-default">Xóa</button>
-                <button type="button" class="btn btn-info">Lưu</button>
+                <button type="button" class="btn btn-default" id="btnThem">Thêm</button>
+                <button type="button" class="btn btn-default" id="btnSua" hidden="">Sửa</button>
+                <button type="button" class="btn btn-warning" id="btnHuy" hidden="">Hủy</button>
+                <button type="button" class="btn btn-danger" id="btnXoa" hidden="">Xóa</button>
+                <button type="button" class="btn btn-info" id="btnLuuSua" hidden="">Lưu</button>
+                <button type="button" class="btn btn-info" id="btnLuuThem" hidden="">Lưu</button>
             </div>
         </div>
 
         <form class="col-xs-12">
-            <div class="form-row col-xs-2">
-                <label>ID: </label>
-                <input id="name" readonly type="text" class="form-control">
+        	
+        	<div class="form-row col-xs-4" hidden="">
+                <label>Mã: </label>
+                <input id="idAcc" readonly type="text" class="form-control">
             </div>
+            
             <div class="form-row col-xs-4">
-                <label>Tài khoản: </label>
-                <input id="name" readonly type="text" class="form-control">
+                <label>Tên khách hàng: </label>
+                <input id="nameCus" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-1">
+                <label>Giới tính: </label>
+                <input id="gender" readonly type="text" class="form-control">
             </div>
             <div class="form-row col-xs-3">
                 <label>SDT: </label>
-                <input id="name" readonly type="text" class="form-control">
+                <input id="phone" readonly type="text" class="form-control">
             </div>
-            <div class="form-row col-xs-3">
+            <div class="form-row col-xs-4">
                 <label>Email: </label>
-                <input id="name" readonly type="text" class="form-control">
+                <input id="email" readonly type="text" class="form-control">
             </div>
-            <div class="form-row col-xs-12">
+            <div class="form-row col-xs-4">
+                <label>Tài khoản: </label>
+                <input id="user" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-8">
                 <label>Địa chỉ: </label>
-                <input id="name" readonly type="text" class="form-control">
+                <input id="address" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-2">
+             	<label>Loại user: </label>
+                <select class="form-control" id="role" style="height: 35px" disabled>
+                	<option>ADM</option>
+                	<option>CUS</option>
+                </select>
+            </div>
+            <div class="form-row col-xs-2" id="chienn" hidden="">
+                <label>Password: </label>
+                <input id="pass" type="password" class="form-control">
             </div>
         </form>
     
 
         <div class="col-xs-12" style="margin-top: 2%">
-            <table id="example1" class="table table-bordered">
+            <table id="example1" class="table table-bordered table-hover">
               <thead>
               <tr>
-                <th>ID</th>
-                <th>Tài khoản</th>
-                <th>Tên khách</th>
+                <th>Mã Account</th>
+                <th>Tên KH</th>
                 <th>Giới tính</th>
-                <th>Email</th>                  
-                <th>SDT</th>             
-                <th>Địa chỉ</th>
+                <th>SDT</th>
+                <th>Email</th>              
+                <th>Tài khoản</th>
+                <th hidden="">Địa chỉ</th>
+                <th>Code</th>
+                <th hidden="">Pass</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>01</td>
-                <td>Trần Đình Chiến</td>
-                <td>26/03/1997</td>
-                <td>Mr</td>                  
-                <td>0977621504</td>             
-                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
-                <td>Trần Đình Chiến</td>
-              </tr>
-              <tr >      
-                <td>02</td>
-                <td>Nguyễn Đình Chiến</td>
-                <td>26/03/1999</td>
-                <td>Mr</td>                  
-                <td>0977141504</td>
-                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
-                <td>Trần Đình Chiến</td>
-              </tr>
-              <tr>
-                
-                <td>03</td>
-                <td>Trần Hùng Cường</td>
-                <td>21/09/1997</td>
-                <td>Mrs</td>                  
-                <td>099621504</td>
-                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
-                <td>Trần Đình Chiến</td>
-              </tr>
-              <tr>
-                <td>04</td>
-                <td>Trần Đình Chiến</td>
-                <td>26/03/1997</td>
-                <td>Mr</td>                  
-                <td>0977621504</td>             
-                <td><a data-toggle="modal" data-target="#modal-AddJD"> Java Dev</a></td>
-                <td>Trần Đình Chiến</td>
+              <tr th:each="ac : ${listAccount}">
+                <td th:text="${ac.idAcc}">ACC1</td>
+                <td th:text="${ac.nameCus}">Nguyễn Văn Chiến</td>
+                <td th:text="${ac.gender}">Nam</td>
+                <td th:text="${ac.phone}">0794343226</td>                  
+                <td th:text="${ac.email}">nvmcuong97@gmail.com</td>             
+                <td th:text="${ac.userName}">admin</td>
+                <td th:text="${ac.address}" hidden="">số 11 đường 4-4 quận Tân bình</td>
+                <td th:text="${ac.code}">ADM</td>
+                <td th:text="${ac.pass}" hidden="">123</td>
               </tr>
               </tbody>
               <tfoot>
               <tr>
-                <th>ID</th>
-                <th>Tài khoản</th>
-                <th>Tên khách</th>
+                <th>Mã Account</th>
+                <th>Tên KH</th>
                 <th>Giới tính</th>
-                <th>Email</th>                  
-                <th>SDT</th>             
-                <th>Địa chỉ</th>
+                <th>SDT</th>
+                <th>Email</th>              
+                <th>Tài khoản</th>
+                <th hidden="">Địa chỉ</th>
+                <th>Code</th>
+                <th hidden="">Pass</th>
               </tr>
               </tfoot>
             </table>
@@ -266,5 +266,102 @@
 <script type="text/javascript" th:src="@{/public/vendor/select2/select2.min.js}"></script>
 
 <script th:src="@{/public/javascripts/main.js}"></script>
+
+<script>
+$(document).ready(function(){
+	  
+	$("#example1 tr").click(function() {
+		
+        $("#btnXoa").removeAttr('hidden');
+        $("#btnSua").removeAttr('hidden');
+        $("#btnHuy").attr('hidden','true');
+        $("#btnLuuThem").attr('hidden','true');
+        
+        $("#nameCus").attr('readonly','true');
+        $("#gender").attr('readonly','true');
+        $("#phone").attr('readonly','true');
+        $("#email").attr('readonly','true');
+        $("#address").attr('readonly','true');
+        $("#user").attr('readonly','true');
+        $("#role").attr('disabled','true');
+        
+        var maAcc= $(this).find("td:eq(0)").text();
+        var tenkh= $(this).find("td:eq(1)").text();
+        var gioitinh= $(this).find("td:eq(2)").text();
+        var sdt= $(this).find("td:eq(3)").text();
+        var email= $(this).find("td:eq(4)").text();
+        var taikhoan= $(this).find("td:eq(5)").text();
+        var diachi= $(this).find("td:eq(6)").text();
+        var loaiuser= $(this).find("td:eq(7)").text();
+        var pass= $(this).find("td:eq(8)").text();
+        
+        $("#nameCus").val(tenkh);
+        $("#gender").val(gioitinh);
+        $("#phone").val(sdt);
+        $("#email").val(email);
+        $("#address").val(diachi);
+        $("#user").val(taikhoan);
+        $("#role").val(loaiuser);
+        $("#pass").val(pass);
+        $("#idAcc").val(maAcc);
+    });
+	$("#btnSua").click(function() {
+		$("#btnHuy").removeAttr('hidden');
+		
+		$("#nameCus").removeAttr('readonly');
+        $("#gender").removeAttr('readonly');
+        $("#phone").removeAttr('readonly');
+        $("#email").removeAttr('readonly');
+        $("#address").removeAttr('readonly');
+        $("#user").removeAttr('readonly');
+        $("#role").removeAttr('disabled');
+    });
+	$("#btnThem").click(function() {
+		$("#btnHuy").removeAttr('hidden');
+		$("#chienn").removeAttr('hidden');
+		$("#btnSua").attr('hidden','true');
+		$("#btnXoa").attr('hidden','true');
+		$("#btnLuuThem").removeAttr('hidden');
+		
+		$("#nameCus").removeAttr('readonly');
+        $("#gender").removeAttr('readonly');
+        $("#phone").removeAttr('readonly');
+        $("#email").removeAttr('readonly');
+        $("#address").removeAttr('readonly');
+        $("#user").removeAttr('readonly');
+        $("#role").removeAttr('disabled');
+		
+        $("#nameCus").val("");
+        $("#gender").val("");
+        $("#phone").val("");
+        $("#email").val("");
+        $("#address").val("");
+        $("#user").val("");
+        $("#role").val("");
+        $("#pass").val("");
+    });
+	
+	$("#btnHuy").click(function() {
+		location.reload();
+    });
+	
+	$("#btnXoa").click(function() {
+		var maAcc= $("#idAcc").val();
+		$.ajax({
+	        type: "post",
+	        url: "/deleteAcc",  
+	        data:{ idAcc: "dsada", chien : "chien"},
+	        success: function(){
+	        	console.log("send success to server");
+	        	location.reload();
+	        },
+	        error: function(){      
+	         alert('Error while request..');
+	        }
+		});
+    });
+	
+});
+</script>
 </body>
 </html>
