@@ -2128,23 +2128,31 @@ li.sale-noti > a {
 }
 
 .table-shopping-cart .column-1 {
-  width: 225px;
-  padding-left: 50px;
+  width: 175px;
+  padding-left: 40px;
 }
 .table-shopping-cart .column-2 {
-  width: 330px;
-  padding-right: 30px;
+	text-align: center;
+  width: 300px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .table-shopping-cart .column-3 {
-  width: 133px;
-  padding-right: 30px;
+	text-align: center;
+  width: 100px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .table-shopping-cart .column-4 {
-  width: 355px;
+	text-align: center;
+  width: 170px;
   padding-right: 30px;
+  padding-leaf: 30px;
 }
 .table-shopping-cart .column-5 {
-  padding-right: 30px;
+	text-align: center;
+  width: 300px;
+  padding-right: 10px;
 }
 
 .table-shopping-cart .table-head th {

@@ -51,7 +51,7 @@ public class ProductDAO {
         return ds;
     } 
 	
-	public Product getAllProductById(String idPro){
+	public Product getProductById(String idPro){
 		String sql = "Select * from Product where idPro = ?";
 		return template.queryForObject(sql,new Object[] {idPro} ,new RowMapper<Product>() {
 			public Product mapRow(ResultSet rs, int row) throws SQLException {
