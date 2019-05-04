@@ -32,6 +32,11 @@
     <link type="text/css" rel="stylesheet" th:href="@{/public/vendor/bootstrap/css/bootstrap-theme.css}">
 
 </head>
+<style>
+	.selected {
+		background-color: #f2f2f2;
+	}
+</style>
 <body>
     <header class="header1">
         <!-- Header desktop -->
@@ -66,18 +71,18 @@
                     <nav class="menu">
                         <ul class="main_menu">
                             <li class="active">
-                                <a href="youtube.com">Trang chủ</a>
+                                <a href="/webBH/product">Trang chủ</a>
                             </li>
-                            <li class="active">
-                                <a href="/" >Sản Phẩm</a>
+                            <li>
+                                <a href="/webBH/productMgmt" >Quản Lý Sản Phẩm</a>
                             </li>
 
                             <li>
-                                <a href="/cart">Hóa đơn</a>
+                                <a href="/webBH/orderMgmt">Quản Lý Hóa đơn</a>
                             </li>
 
-                            <li>
-                                <a href="youtube.com">Khách hàng</a>
+                            <li style="text-shadow: 1px 1px grey">
+                                <a href="/webBH/userMgmt">Quản Lý Khách hàng</a>
                             </li>
                         </ul>
                     </nav>
@@ -164,27 +169,27 @@
             
             <div class="form-row col-xs-4">
                 <label>Tên khách hàng: </label>
-                <input id="nameCus" readonly type="text" class="form-control">
+                <input id="nameCus" readonly type="text" class="form-control" placeholder="Nhập tên khách hàng...">
             </div>
             <div class="form-row col-xs-1">
                 <label>Giới tính: </label>
-                <input id="gender" readonly type="text" class="form-control">
+                <input id="gender" readonly type="text" class="form-control" placeholder="Nam/Nữ">
             </div>
             <div class="form-row col-xs-3">
                 <label>SDT: </label>
-                <input id="phone" readonly type="text" class="form-control">
+                <input id="phone" readonly type="text" class="form-control" placeholder="Nhập số điện thoại...">
             </div>
             <div class="form-row col-xs-4">
                 <label>Email: </label>
-                <input id="email" readonly type="text" class="form-control">
+                <input id="email" readonly type="text" class="form-control" placeholder="Enter email...">
             </div>
             <div class="form-row col-xs-4">
                 <label>Tài khoản: </label>
-                <input id="user" readonly type="text" class="form-control">
+                <input id="user" readonly type="text" class="form-control" placeholder="Tên đăng nhập...">
             </div>
             <div class="form-row col-xs-8">
                 <label>Địa chỉ: </label>
-                <input id="address" readonly type="text" class="form-control">
+                <input id="address" readonly type="text" class="form-control" placeholder="Nhập địa chỉ...">
             </div>
             <div class="form-row col-xs-2">
              	<label>Loại user: </label>
@@ -193,9 +198,9 @@
                 	<option>CUS</option>
                 </select>
             </div>
-            <div class="form-row col-xs-2" id="chienn" hidden="">
+            <div class="form-row col-xs-2" id="framepass" hidden="">
                 <label>Password: </label>
-                <input id="pass" type="password" class="form-control">
+                <input id="pass" type="password" class="form-control" placeholder="Nhập mật khẩu...">
             </div>
         </form>
     
@@ -271,6 +276,8 @@
 $(document).ready(function(){
 	  
 	$("#example1 tr").click(function() {
+		$('#example1 .selected').removeClass('selected');
+		$(this).addClass('selected');
 		
         $("#btnXoa").removeAttr('hidden');
         $("#btnSua").removeAttr('hidden');
@@ -307,6 +314,9 @@ $(document).ready(function(){
     });
 	$("#btnSua").click(function() {
 		$("#btnHuy").removeAttr('hidden');
+		$("#btnLuuSua").removeAttr('hidden');
+		$("#btnSua").attr('hidden','true');
+		$("#btnXoa").attr('hidden','true');
 		
 		$("#nameCus").removeAttr('readonly');
         $("#gender").removeAttr('readonly');
@@ -318,7 +328,7 @@ $(document).ready(function(){
     });
 	$("#btnThem").click(function() {
 		$("#btnHuy").removeAttr('hidden');
-		$("#chienn").removeAttr('hidden');
+		$("#framepass").removeAttr('hidden');
 		$("#btnSua").attr('hidden','true');
 		$("#btnXoa").attr('hidden','true');
 		$("#btnLuuThem").removeAttr('hidden');
@@ -347,19 +357,76 @@ $(document).ready(function(){
 	
 	$("#btnXoa").click(function() {
 		var maAcc= $("#idAcc").val();
-		$.ajax({
-	        type: "post",
-	        url: "/deleteAcc",  
-	        data:{ idAcc: "dsada", chien : "chien"},
-	        success: function(){
-	        	console.log("send success to server");
-	        	location.reload();
-	        },
-	        error: function(){      
-	         alert('Error while request..');
-	        }
-		});
+		if (confirm('Bạn chắc muốn xóa? Sẽ không xóa được những user đã mua hàng!!')){
+			$.ajax({
+		        type: "post",
+		        url: "/webBH/deleteAcc",  
+		        data:{ idAcc: maAcc , chien : "chien"},
+		        success: function(){
+		        	console.log("send success to server");
+		        	location.reload();
+		        },
+		        error: function(){      
+		         alert('Error while request..');
+		        }
+			});
+		}
     });
+	
+	$("#btnLuuSua").click(function() {
+		var idAcc = $("#idAcc").val();
+		var nameCus = $("#nameCus").val();
+        var gender = $("#gender").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var address = $("#address").val();
+        var user = $("#user").val();
+        var role = $("#role").val();
+        var pass = $("#pass").val();
+  		
+        if (confirm('Bạn muốn lưu không?')){
+			$.ajax({
+		        type: "post",
+		        url: "/webBH/editAcc",  
+		        data:{ idAcc: idAcc , nameCus :nameCus, gender : gender, phone: phone, email:email, address:address, user: user, role:role, pass: pass},
+		        success: function(){
+		        	console.log("send success to server");
+		        	location.reload();
+		        },
+		        error: function(){      
+		         alert('Error while request..');
+		        }
+			});
+		}
+    });
+	
+	$("#btnLuuThem").click(function() {
+		
+		var nameCus = $("#nameCus").val();
+        var gender = $("#gender").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var address = $("#address").val();
+        var user = $("#user").val();
+        var role = $("#role").val();
+        var pass = $("#pass").val();
+        
+        if (confirm('Bạn muốn lưu không?')){
+			$.ajax({
+		        type: "post",
+		        url: "/webBH/addAcc",  
+		        data:{ nameCus :nameCus, gender : gender, phone: phone, email:email, address:address, user: user, role:role, pass: pass},
+		        success: function(){
+		        	console.log("send success to server");
+		        	location.reload();
+		        },
+		        error: function(){      
+		         alert('Error while request..');
+		        }
+			});
+		}
+    });
+	
 	
 });
 </script>

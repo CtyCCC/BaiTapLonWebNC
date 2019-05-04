@@ -104,6 +104,7 @@ set dateformat dMy
 insert into Orders values ('OD1','ACC1','22/12/2017',770)
 insert into Orders values ('OD2','ACC2','22/12/2018',85300)
 insert into Orders values ('OD3','ACC3','22/12/2019',25300)
+insert into Orders values ('OD4','ACC3','22/11/2019',25300)
 
 insert into OrderDetail values ('ODD1','OD1','C21',1,550)
 insert into OrderDetail values ('ODD2','OD1','C22',1,220)
@@ -113,7 +114,7 @@ insert into OrderDetail values ('ODD4','OD3','C18',1,25300)
 select * from Product
 select * from Roles
 select * from Account
-select * from Orders
+select * from Orders order by dateCreate
 select * from OrderDetail
 select * from OrderDetail where idOrder = 'OD1'
 delete from Account where idAcc = 'ACC1'

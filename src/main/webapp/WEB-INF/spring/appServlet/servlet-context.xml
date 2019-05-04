@@ -64,6 +64,14 @@
 	<beans:bean id="userdao" class="com.ccc.webBH.management.dao.UserDAO">
 		<beans:property name="template" ref="jt"/>
 	</beans:bean>
+	
+	<beans:bean id="orderdao" class="com.ccc.webBH.management.dao.OrderDAO">
+		<beans:property name="template" ref="jt"/>
+	</beans:bean>
+	
+	<beans:bean id="prodao" class="com.ccc.webBH.management.dao.ProDAO">
+		<beans:property name="template" ref="jt"/>
+	</beans:bean>
 
 	<context:component-scan
 		base-package="com.ccc.webBH.login" />

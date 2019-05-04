@@ -46,8 +46,11 @@ public class UserDAO {
 	}
 	
 	public int updateAcc (Account ac) {
+		int gender = 0;
+		if (ac.getGender().equals("Nam"))
+			gender = 1;
 		String sql = "update Account set code = '"+ac.getCode()+"', userName = '"+ac.getUserName()+"', pass = '"+ac.getPass()+"', nameCus = N'"+ac.getNameCus()+
-				"', email = '"+ac.getEmail()+"', gender = '"+ac.getGender()+"', phone = '"+ac.getPhone()+"', addresss = N'"+ac.getAddress()+ "' where idAcc = '"+ac.getIdAcc()+"'";
+				"', email = '"+ac.getEmail()+"', gender = "+gender+", phone = '"+ac.getPhone()+"', addresss = N'"+ac.getAddress()+ "' where idAcc = '"+ac.getIdAcc()+"'";
 		
 		int kq = 0;
 		try {
@@ -60,8 +63,11 @@ public class UserDAO {
 	
 	public int addNew(Account ac ) {
 		String id = autoIdAcc(getAllAccount());
+		int gender = 0;
+		if (ac.getGender().equals("Nam"))
+			gender = 1;
 		String sql = "insert into Account values ('"+id+"','"+ac.getCode()+"','"+ac.getUserName()+"','"+ac.getPass()+"',N'"+ac.getNameCus()+"','"+
-		ac.getEmail()+"','"+ac.getGender()+"','"+ac.getPhone()+"',N'"+ac.getAddress()+"')";
+		ac.getEmail()+"',"+gender+",'"+ac.getPhone()+"',N'"+ac.getAddress()+"')";
 		int kq = 0;
 		try {
 			kq = template.update(sql);
