@@ -100,18 +100,18 @@
     <!--Dang ký-->
     <div class="modalDN" id="dangky">
         <div class="well containerDN">
-            <form id="kt" class="form-horizontal" method="get" action="signup" >
+            <form id="kt" class="form-horizontal" method="post" action="signup" >
 
                 <center><legend>Điền các thông tin của bạn !! </legend></center>
 
                 <div class="form-group">
                     <label class="col-md-4 control-lable">Tài khoản: </label>
-                    <div class="col-md-8"><input name="txtuser" class="form-control" type="text" autofocus></div>
+                    <div class="col-md-8"><input name="userName" class="form-control" type="text" autofocus></div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-lable">Mật khẩu: </label>
-                    <div class="col-md-8"><input id="pass" name="txtpass" class="form-control" type="password"></div>
+                    <div class="col-md-8"><input id="pass" name="pass" class="form-control" type="password"></div>
                 </div>
 
 
@@ -123,23 +123,35 @@
 
                 <div class="form-group">
                     <label class="col-md-4 control-lable">Tên: </label>
-                    <div class="col-md-8"><input name="txtten" class="form-control" type="text"></div>
+                    <div class="col-md-8"><input name="nameCus" class="form-control" type="text"></div>
                 </div>
-
+                
+                 <div class="form-group">
+                 <label class="col-md-4 control-lable">Giới Tính: </label>
+                 	<div class="col-md-4">
+                 		<input type="radio" name=gender value="Nam" class="col-md-5" checked="checked">
+                 		<label class="col-md-5 control-lable">Nam</label>
+                 	</div>
+                 	<div class="col-md-4">
+                 		<input type="radio" name=gender value="Nữ" class="col-md-5">
+                 		<label class="col-md-5 control-lable">Nữ</label>
+                 	</div>
+                </div>
+                
                 <div class="form-group">
                     <label class="col-md-4 control-lable">SDT: </label>
-                    <div class="col-md-8"><input name="txtsdt" class="form-control" type="text"></div>
+                    <div class="col-md-8"><input name="phone" class="form-control" type="text"></div>
                 </div>
 
 
                 <div class="form-group">
                     <label class="col-md-4 control-lable">Email: </label>
-                    <div class="col-md-8"><input name="txtmail" class="form-control" type="email"></div>
+                    <div class="col-md-8"><input name="email" class="form-control" type="email"></div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-lable">Địa chỉ: </label>
-                    <div class="col-md-8"><input name="txtdiachi" class="form-control" type="text"></div>
+                    <div class="col-md-8"><input name="address" class="form-control" type="text"></div>
                 </div>
 
                 <div class="form-group">

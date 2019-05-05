@@ -62,9 +62,9 @@ ALTER TABLE Account ADD FOREIGN KEY (code) REFERENCES Roles (code);
 insert into Roles values('ADM','ROLE_ADMIN')
 insert into Roles values('CUS','ROLE_CUSTOMMER')
 
-insert into Account values('ACC33','ADM','admin','123',N'Nguyễn Văn Mạnh Cường','nvmcuong97@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
-insert into Account values('ACC1','ADM','admin','123',N'Nguyễn Văn Mạnh Cường','nvmcuong97@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
-insert into Account values('ACC2','ADM','admin','123',N'Trần Đình Chiến','dckool@gmail.com',1,'0794343226',N'Quang Trung Gò Vấp')
+insert into Account values('ACC33','ADM','admin1','123',N'Nguyễn Văn Mạnh Cường','nvmcuong97@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
+insert into Account values('ACC1','ADM','admin2','123',N'Nguyễn Văn Mạnh Cường','nvmcuong97@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
+insert into Account values('ACC2','ADM','admin3','123',N'Trần Đình Chiến','dckool@gmail.com',1,'0794343226',N'Quang Trung Gò Vấp')
 insert into Account values('ACC3','CUS','hcuong','123',N'Trần Hùng Cường','hungcuong97@gmail.com',1,'0794343226',N'Nguyễn Oanh Gò Vấp')
 
 insert into Product values('C1','BMW 1 SERIES 5',2016,'BMW','Car',65000,N'BMW 1 Series có mức tiêu thụ nhiên liệu hiệu quả đáng kể kết hợp với lượng khí thải CO2 thấp, đặc biệt là phiên bản BMW 116d EfficientDynamics Edition.Các công nghệ phun tiên tiến nhất, hệ thống kiểm soát van biến thiên thông minh và động cơ tăng áp - đó chính là công thức cho sự thành công của dòng động cơ BMW EfficientDynamics','public/images/c1.png')
