@@ -43,23 +43,33 @@ public class HomeController {
 		}
 		ArrayList<Product> ds = (ArrayList<Product>) dao.getAllProductByType("Car");
 		model.addAttribute("quantity",quan);
-		model.addAttribute("dsCar", ds);
+		model.addAttribute("dsPro", ds);
+		model.addAttribute("cmd", "product");
 		return "product";
 	}
 	
 	@GetMapping("/phukien")
-	public String phukien(Model model) {
+	public String phukien(Model model,HttpSession session) {
+		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
+		int quan = 0;
+		if(!(cartItems == null)) {
+			quan = cartItems.size();			
+		}
 		ArrayList<Product> ds = (ArrayList<Product>) dao.getAllProductByType("Accessories");
-		model.addAttribute("dsPK", ds);
-		return "phukien";
+		model.addAttribute("quantity",quan);
+		model.addAttribute("dsPro", ds);
+		model.addAttribute("cmd", "phukien");
+		return "product";
 	}
 	
 	@GetMapping("/product-detail")
-	public String productDetail(Model model, HttpServletRequest req){
+	public String productDetail(Model model, HttpServletRequest req,HttpSession session){
+		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
+		int quan = 0;
 		String idPro = req.getParameter("idPro");
 		Product pr = (Product) dao.getProductById(idPro);
 		model.addAttribute("pro", pr);
-		System.out.println(pr);
+		model.addAttribute("quantity",quan);
 		return "product-detail";
 	}
 	
@@ -124,7 +134,6 @@ public class HomeController {
 				Cart item = cartItems.get(dsIdPro.get(i));
 				if(item !=null) {
 					dsCart.add(item);
-					System.out.println(item);
 				}			
 			}
 		}else {
@@ -147,6 +156,7 @@ public class HomeController {
 	@PostMapping("/deleteCart")
 	public @ResponseBody String removeCart(HttpServletRequest req,HttpSession session ) {
 		String key = req.getParameter("key");
+		System.out.println(key);
 		//Kiá»ƒm tra vÃ  xÃ³a item khá»�i session CartItems
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		if (cartItems == null) {
@@ -189,5 +199,39 @@ public class HomeController {
 			c.setQuantity(cartItems.get(key).getQuantity()-1);
 			cartItems.replace(key, c);
 		}
+	}
+	
+	@GetMapping("/searchKeyword")
+	public String searchByKeyWord(Model model, HttpSession session, HttpServletRequest req) {
+		String keyword = req.getParameter("keyword");
+		String cmd = req.getParameter("cmd");
+		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
+		int quan = 0;
+		if(!(cartItems == null)) {
+			quan = cartItems.size();			
+		}
+		ArrayList<Product> ds = (ArrayList<Product>) dao.getAllProductWithKeyWord(keyword,cmd);
+		model.addAttribute("quantity",quan);
+		model.addAttribute("dsPro", ds);
+		model.addAttribute("cmd", cmd);
+		return "product";
+	}
+	
+	@GetMapping("/searchPrice")
+	public String searchByPrice(Model model, HttpSession session, HttpServletRequest req) {
+		double min = Double.parseDouble(req.getParameter("lower"));
+		double max = Double.parseDouble(req.getParameter("upper"));
+		String cmd = req.getParameter("cmd");
+		System.out.println();
+		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
+		int quan = 0;
+		if(!(cartItems == null)) {
+			quan = cartItems.size();			
+		}
+		ArrayList<Product> ds = (ArrayList<Product>) dao.getAllProductWithPrice(min, max, cmd);
+		model.addAttribute("quantity",quan);
+		model.addAttribute("dsPro", ds);
+		model.addAttribute("cmd", cmd);
+		return "product";
 	}
 }

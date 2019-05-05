@@ -51,6 +51,7 @@ public class ProductDAO {
         return ds;
     } 
 	
+	//Lấy product theo id
 	public Product getProductById(String idPro){
 		String sql = "Select * from Product where idPro = ?";
 		return template.queryForObject(sql,new Object[] {idPro} ,new RowMapper<Product>() {
@@ -60,4 +61,40 @@ public class ProductDAO {
 			}
 		});
 	}
+	
+	//Tìm product theo từ khóa
+	public List<Product> getAllProductWithKeyWord(String key, String cmd){
+		String sql = "select * from Product";
+		if(cmd.equals("product")) {
+			sql = "select * from Product WHERE typee = 'Car' AND namePro LIKE '%"+key+"%'";
+		}
+		if(cmd.equals("phukien")) {
+			sql = "select * from Product WHERE typee = 'Accessories' AND namePro LIKE '%"+key+"%'";
+		}
+		
+		return template.query(sql, new RowMapper<Product>() {
+			public Product mapRow(ResultSet rs, int row) throws SQLException {
+				Product c = new Product(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getString(5),rs.getDouble(6), rs.getString(7), rs.getString(8));
+				return c;
+			}
+		});
+	}
+	
+	//Tìm theo khoảng price
+	public List<Product> getAllProductWithPrice(double min, double max, String cmd){
+		String sql = "select * from Product";
+		if(cmd.equals("product")) {
+			sql = "select * from Product WHERE typee = 'Car' AND price >="+min+" AND price <="+max;
+		}
+		if(cmd.equals("phukien")) {
+			sql = "select * from Product WHERE typee = 'Accessories' AND price >="+min+" AND price <="+max;
+		}
+		
+		return template.query(sql, new RowMapper<Product>() {
+			public Product mapRow(ResultSet rs, int row) throws SQLException {
+				Product c = new Product(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getString(5),rs.getDouble(6), rs.getString(7), rs.getString(8));
+				return c;
+			}
+		});
+	} 
 }

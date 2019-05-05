@@ -34,7 +34,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/public/stylesheets/main.css}">
 </head>
 <body class="animsition">
-
+	<input type="text" name="" th:value="${cmd}" hidden="true" id="cmd">
 	<!-- Header -->
 	<header class="header1">
 		<!-- Header desktop -->
@@ -164,7 +164,7 @@
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
 							<!-- Button -->
-							<a id="banner11" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+							<a id="banner11" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4" th:href="@{/product-detail(idPro=C21)}">
 								Mua ngay
 							</a>
 						</div>
@@ -183,7 +183,7 @@
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
 							<!-- Button -->
-							<a id="banner22" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+							<a id="banner22" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4" th:href="@{/product-detail(idPro=C22)}">
 								Mua ngay
 							</a>
 						</div>
@@ -208,14 +208,20 @@
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="product" class="s-text13 active1">
+								<a href="product" class="s-text13 active1" id="car">
 									Ô tô
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="phukien" class="s-text13">
+								<a href="phukien" class="s-text13" id="phukien">
 									Phụ kiện
+								</a>
+							</li>
+
+							<li class="p-t-4">
+								<a href="phukien" class="s-text13" id="phutùng">
+									Phụ tùng
 								</a>
 							</li>
 						</ul>
@@ -235,10 +241,11 @@
 							</div>
 
 							<div class="flex-sb-m flex-w p-t-16">
-								<form action="/search" id="formtimkiem">
+								<form action="/webBH/searchPrice" id="formtimkiem">
 								<div class="w-size11">
 									<input type="text" id="lower" name="lower" hidden="true" value="0">
 									<input type="text" id="upper" name="upper" hidden="true" value="10000000">
+									<input type="text" id="cm" name="cmd" hidden="true" value="">
 									<!-- Button -->
 									<button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" type="submit" onclick="search()">
 										Tìm
@@ -246,16 +253,16 @@
 								</div>
 
 								<div class="s-text3 p-t-10 p-b-10">
-									Trong khoảng: <span id="value-lower">610</span>tr - <span id="value-upper">980</span>tr
+									Trong khoảng: <span id="value-lower">610</span>$ - <span id="value-upper">980</span>$
 								</div>
 								</form>
 							</div>
 						</div>
 
 						<div class="search-product pos-relative bo4 of-hidden">
-							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Tìm sản phẩm...">
+							<input id="txtSearch" class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Tìm sản phẩm...">
 
-							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" id="btnSearch">
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -266,12 +273,12 @@
 
 					<!-- Product -->
 					<div class="row row_product">
-						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50" id="boxstart" th:each="cars : ${dsCar}">
+						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50" id="boxstart" th:each="pros : ${dsPro}">
 							<!-- Block2 -->
 							<div class="block2">
-								<input type="text" name="" id="idPro" th:value="${cars.idPro}" hidden="true">
+								<input type="text" name="" id="idPro" th:value="${pros.idPro}" hidden="true">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative">
-									<img class="vcl" th:src="@{${cars.urlImage}}" alt="IMG-PRODUCT" id="img_sp_1">
+									<img class="vcl" th:src="@{${pros.urlImage}}" alt="IMG-PRODUCT" id="img_sp_1">
 
 									<div class="block2-overlay trans-0-4">
 									
@@ -286,10 +293,10 @@
 								</div>
 
 								<div class="block2-txt p-t-20">
-									<a th:href="@{/product-detail(idPro=${cars.idPro})}" class="block2-name dis-block s-text3 p-b-5" id="name_sp" th:text="${cars.namePro}">
+									<a th:href="@{/product-detail(idPro=${pros.idPro})}" class="block2-name dis-block s-text3 p-b-5" id="name_sp" th:text="${pros.namePro}">
 									</a>
 
-									<span class="block2-price m-text6 p-r-5" id="price_sp_1" aria-valuetext="1" th:text="${cars.price}+' $'">
+									<span class="block2-price m-text6 p-r-5" id="price_sp_1" aria-valuetext="1" th:text="${pros.price}">
 									</span>
 								</div>
 							</div>
@@ -346,6 +353,24 @@
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect2')
 		});
+		var cmd = $("#cmd").val();
+		$(function () {
+			if(cmd=='product'){
+				$("#car").attr('class', 's-text13 active1');
+				$("#phukien").attr('class', 's-text13');
+				$("#phutung").attr('class', 's-text13');
+			}
+			if(cmd=='phukien'){
+				$("#car").attr('class', 's-text13');
+				$("#phukien").attr('class', 's-text13 active1');
+				$("#phutung").attr('class', 's-text13');
+			}
+			if(cmd=='phutung'){
+				$("#car").attr('class', 's-text13');
+				$("#phukien").attr('class', 's-text13');
+				$("#phutung").attr('class', 's-text13 active1');
+			}
+		});
 	</script>
 <!--===============================================================================================-->
 	<script type="text/javascript" th:src="@{/public/vendor/daterangepicker/moment.min.js}"></script>
@@ -357,6 +382,18 @@
 	<script type="text/javascript" th:src="@{/public/vendor/sweetalert/sweetalert.min.js}"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js}"></script>
 	<script type="text/javascript">
+		
+		//Format tiền 
+        function formatNumber(num) {
+		  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+" $"
+		}
+
+		$('.block2-price').each(function() {
+			var price = Math.round($(this).text());
+			var f = formatNumber(price);
+			$(this).text(f);
+		});
+		
 
 		$('.block2-btn-addcart').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -380,12 +417,20 @@
 			});
 		});
 
+		$("#btnSearch").click(function(event) {
+			/* Act on the event */
+			var keyword = $("#txtSearch").val();
+			var cmd = $("#cmd").val();
+			window.location.href = "/webBH/searchKeyword?keyword="+keyword+"&cmd="+cmd;
+		});
 
 		function search() {
 			var up = $('#value-upper').text();
 			var low = $('#value-lower').text();
+			var cmd = $("#cmd").val();
 			$('#upper').attr('value',up);
 			$('#lower').attr('value',low);
+			$('#cm').attr('value',cmd);
         }
 	</script>
 
@@ -395,15 +440,57 @@
 		/*[ No ui ]
 	    ===========================================================*/
 	    var filterBar = document.getElementById('filter-bar');
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    
+	    var cmd = $("#cmd").val();
+	    if(cmd=='product'){
 
-	    noUiSlider.create(filterBar, {
-	        start: [ 1,100 ],
+	    	var low = 10000;
+		    var up = 300000; 
+		    for (var i = 0; i < sURLVariables.length; i++) {
+		        var sParameterName = sURLVariables[i].split('=');
+		        if (sParameterName[0] == 'lower') {
+		            low = sParameterName[1];
+		        }
+		        if (sParameterName[0] == 'upper') {
+		            up = sParameterName[1];
+		        }
+		    }
+
+	    	noUiSlider.create(filterBar, {
+	        start: [ low, up ],
+	        connect: true,
+	        range: {
+	            'min': 10000,
+	            'max': 300000
+	        }
+	    	});
+	    }
+	    if(cmd=='phukien'){
+
+	    	var low = 1;
+		    var up = 1000; 
+		    for (var i = 0; i < sURLVariables.length; i++) {
+		        var sParameterName = sURLVariables[i].split('=');
+		        if (sParameterName[0] == 'lower') {
+		            low = sParameterName[1];
+		        }
+		        if (sParameterName[0] == 'upper') {
+		            up = sParameterName[1];
+		        }
+		    }
+
+	    	noUiSlider.create(filterBar, {
+	        start: [ 1,1000 ],
 	        connect: true,
 	        range: {
 	            'min': 1,
-	            'max': 100
+	            'max': 1000
 	        }
-	    });
+	    	});
+	    }
+	    
 
 	    var skipValues = [
 	    document.getElementById('value-lower'),

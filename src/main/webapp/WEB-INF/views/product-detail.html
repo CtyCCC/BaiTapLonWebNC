@@ -66,11 +66,11 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="/">Trang chủ</a>
+								<a href="product">Trang chủ</a>
 							</li>
 
 							<li>
-								<a href="/cart">Giỏ hàng</a>
+								<a href="cart">Giỏ hàng</a>
 							</li>
 
 							<li>
@@ -133,7 +133,7 @@
 
 					<div class="header-wrapicon2">
 						<a href="cart"><img th:src="@{/public/images/icons/icon-header-02.png}" class="header-icon1 js-show-header-dropdown" alt="ICON"></a>
-						<span class="header-icons-noti" id="cart-noti">0</span>
+						<span class="header-icons-noti" id="cart-noti" th:text="${quantity}"></span>
 					</div>
 				</div>
 			</div>
@@ -165,6 +165,7 @@
 			</div>
 
 			<div class="w-size14 p-t-30 respon5">
+				<span class="m-text16" id="idpro" aria-valuetext="1" th:text="${pro.idPro}" hidden="true"></span>
 				<h4 class="product-detail-name m-text17 p-b-13" id="name_sp" th:text="${pro.namePro}">
 				</h4>
 				
@@ -176,6 +177,7 @@
 
 				<label class="m-text19">Price: </label>
 				<span class="m-text16" id="price_sp" aria-valuetext="1" th:text="${pro.price}"></span><br>
+
 
 				
 
@@ -270,20 +272,7 @@
 			$("#price_sp").text(f);
 		});
 
-		$('.block2-btn-addcart').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-        document.getElementById('cart-noti').innerHTML=localStorage.length;
+		
 		$('.btn-addcart-product-detail').each(function(){
 			var nameProduct = $('.product-detail-name').html();
 			var price = $('#price_sp').attr('aria-valuetext');
@@ -291,33 +280,19 @@
             var kt = false;
 
             $(this).on('click', function(){
-                if($('#islogin').text()=='1'){
-                    swal(nameProduct, "Đã thêm vào giỏ hàng !", "success");
-                    for (var i=0, sl=localStorage.length; i<sl; ++i){
-                        if(localStorage.key(i)==nameProduct){
-                            var sl_sp = JSON.parse(localStorage.getItem(nameProduct)).sl + 1;
-                            var ob =  {'name': nameProduct, 'image': image, 'price':price, 'sl':sl_sp };
-                            localStorage.setItem(nameProduct,JSON.stringify(ob));
-                            kt = true;
-                        }
-                    };
-                    if(kt==false){
-                        var sl_sp = 1;
-                        var ob =  {'name': nameProduct, 'image': image, 'price':price, 'sl':sl_sp };
-                        localStorage.setItem(nameProduct,JSON.stringify(ob));
-                        document.getElementById('cart-noti').innerHTML=Number($('#cart-noti').text())+1;
-                    }
-
-                }
-                else{
-                    swal("Chào mừng bạn! Hãy đăng nhập để thêm sản phẩm vào giỏ hàng!", {
-                        buttons:  true,
-                    }).then((willLogin) => {
-                        if (willLogin) {
-                            location.replace("https://www.cccstore.tk/login");
-                        }
-                    });
-                }
+                swal(nameProduct, "Đã thêm vào giỏ hàng !", "success");
+                var idPro = $(this).parent().parent().parent().parent().parent().find('#idpro').text();
+                $.ajax({
+		            url: '/webBH/addCart',
+		            type: 'post',
+		            dataType: 'html',
+		            data: {
+			            idPro:idPro
+		            },
+		            success: function(data){
+			        	$('#cart-noti').text(data);
+		        	}
+		        });
             });
 		});
 

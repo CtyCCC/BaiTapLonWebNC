@@ -171,11 +171,11 @@
 						</tr>
 						<!--item trong giỏi hàng-->
 						<tr class="table-row" id="rowstart" th:each="item : ${dsCart}">
+							<td type="text" id="idpro" th:text="${item.product.idPro}" hidden="true"></td>
 							<td class="column-1" >
 								<div class="cart-img-product b-rad-4 o-f-hidden">
 									<img class="imge" id="imgSp" th:src="@{${item.product.urlImage}}" alt="IMG-PRODUCT">
 								</div>
-								<input type="text" id="idpro" th:value="${item.product.idPro}" hidden="true">
 							</td>
 							<td class="column-2" id="nameSp" th:value="${item.product.namePro}" th:text="${item.product.namePro}"></td>
 							<td class="column-3 priceSP" th:text="${item.product.price}">
@@ -326,7 +326,7 @@
 		$('.cart-img-product').each(function() {			
 			$(this).on('click',function () {
 				/* Act on the event */
-				var key = $(this).parent().parent().find('#idpro').val();
+				var key = $(this).parent().parent().find('#idpro').text();
                 Swal.fire({
 				  title: 'Are you sure?',
 				  text: "You won't be able to revert this!",
@@ -361,7 +361,7 @@
 		//nút tăng số lượng
         $('.btn-num-product-up').each(function(){
                 $(this).on('click',function () {
-                    var key = $(this).parent().parent().parent().find('#idpro').val();
+                    var key = $(this).parent().parent().parent().find('#idpro').text();
                     var price = Math.round($(this).parent().parent().parent().find('#priceSp').text());
 					var sl =  Math.round($(this).parent().parent().find('#sl_sp_1').val())+1;
 					var tong = price*sl;
@@ -387,7 +387,7 @@
             $(this).on('click',function () {
             	var s = Math.round($(this).parent().parent().find('#sl_sp_1').val());
             	if(s>1){
-            		var key = $(this).parent().parent().parent().find('#idpro').val();
+            		var key = $(this).parent().parent().parent().find('#idpro').text();
                     var price = Math.round($(this).parent().parent().parent().find('#priceSp').text());
 					var sl =  Math.round($(this).parent().parent().find('#sl_sp_1').val())-1;
 					var tong = price*sl;
@@ -412,7 +412,7 @@
         //nút xóa item trong giỏ
         $('.btn-light').each(function(){
             $(this).on('click',function () {
-                var key = $(this).parent().parent().find('#idpro').val();
+                var key = $(this).parent().find('#idpro').text();
                 Swal.fire({
 				  title: 'Are you sure?',
 				  text: "You won't be able to revert this!",
