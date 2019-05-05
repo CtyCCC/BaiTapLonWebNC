@@ -71,7 +71,7 @@ public class HomeController {
 		ArrayList<String> dsIdPro = (ArrayList<String>) session.getAttribute("dsIdPro");
 		int kt = 0;
 		if(dsIdPro == null) {
-			dsIdPro = new ArrayList<>();
+			dsIdPro = new ArrayList<String>();
 			dsIdPro.add(idPro);
 		}else {
 			for(int i = 0; i<dsIdPro.size();i++) {
@@ -85,27 +85,27 @@ public class HomeController {
 		}
 		
 		
-		//Kiểm tra xem đã có Cart nào trong session chưa...nếu chưa thì tạo
+		//Kiá»ƒm tra xem Ä‘Ã£ cÃ³ Cart nÃ o trong session chÆ°a...náº¿u chÆ°a thÃ¬ táº¡o
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		if (cartItems == null) {
             cartItems = new HashMap<String,Cart>();
         }
 		
-		//Kiểm tra product đã có trong session chưa
+		//Kiá»ƒm tra product Ä‘Ã£ cÃ³ trong session chÆ°a
 		Product pro = dao.getProductById(idPro);
-		if(cartItems.containsKey(idPro)) {  	//Nếu đã có thì cập nhật số lượng thêm 1
+		if(cartItems.containsKey(idPro)) {  	//Náº¿u Ä‘Ã£ cÃ³ thÃ¬ cáº­p nháº­t sá»‘ lÆ°á»£ng thÃªm 1
 			Cart item = cartItems.get(idPro);
 			item.setProduct(pro);
 			item.setQuantity(item.getQuantity()+1);
 			cartItems.put(idPro, item);
-		}else {		//Nếu chưa có thì thêm item đó vào 
+		}else {		//Náº¿u chÆ°a cÃ³ thÃ¬ thÃªm item Ä‘Ã³ vÃ o 
 			Cart item = new Cart();
 			item.setProduct(pro);
 			item.setQuantity(1);
 			cartItems.put(idPro, item);
 		}
 		
-		//Thêm cart vào session
+		//ThÃªm cart vÃ o session
 		session.setAttribute("CartItems", cartItems);
 		session.setAttribute("dsIdPro", dsIdPro);
 		return cartItems.size()+"";
@@ -113,12 +113,12 @@ public class HomeController {
 	
 	@GetMapping("/cart")
 	public String cart(HttpSession session,Model model) {
-		//Kiểm tra session
+		//Kiá»ƒm tra session
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		ArrayList<String> dsIdPro = (ArrayList<String>) session.getAttribute("dsIdPro");
-		ArrayList<Cart> dsCart = new ArrayList<>();
+		ArrayList<Cart> dsCart = new ArrayList<Cart>();
 		
-		//Chuyển dữ liệu session thành 1 mảng các item trong cart
+		//Chuyá»ƒn dá»¯ liá»‡u session thÃ nh 1 máº£ng cÃ¡c item trong cart
 		if(cartItems!=null && dsIdPro!=null){
 			for (int i=0; i<dsIdPro.size();i++) {
 				Cart item = cartItems.get(dsIdPro.get(i));
@@ -131,13 +131,13 @@ public class HomeController {
 			System.out.println("Ko co san pham trong gio hang!");
 		}
 		
-		//Tính tổng tiền
+		//TÃ­nh tá»•ng tiá»�n
 		double totalPrice = 0;
 		for(int i=0;i<dsCart.size();i++) {
 			totalPrice += (dsCart.get(i).getProduct().getPrice()*dsCart.get(i).getQuantity());
 		}
 		
-		//Gán giá trị cho model để font-end sử dụng
+		//GÃ¡n giÃ¡ trá»‹ cho model Ä‘á»ƒ font-end sá»­ dá»¥ng
 		model.addAttribute("dsCart", dsCart);
 		model.addAttribute("quantity",dsCart.size());
 		model.addAttribute("totalPrice", totalPrice);
@@ -147,19 +147,19 @@ public class HomeController {
 	@PostMapping("/deleteCart")
 	public @ResponseBody String removeCart(HttpServletRequest req,HttpSession session ) {
 		String key = req.getParameter("key");
-		//Kiểm tra và xóa item khỏi session CartItems
+		//Kiá»ƒm tra vÃ  xÃ³a item khá»�i session CartItems
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		if (cartItems == null) {
-            cartItems = new HashMap<>();
+            cartItems = new HashMap<String,Cart>();
         }
 		if(cartItems.containsKey(key)) {
 			cartItems.remove(key);
 		}
 		
-		//Kiểm tra và xóa idPro khỏi session dsIdPro
+		//Kiá»ƒm tra vÃ  xÃ³a idPro khá»�i session dsIdPro
 		ArrayList<String> dsIdPro = (ArrayList<String>) session.getAttribute("dsIdPro");
 		if(dsIdPro == null) {
-			dsIdPro = new ArrayList<>();
+			dsIdPro = new ArrayList<String>();
 		}
 		for(int i = 0; i < dsIdPro.size(); i++) {
 			if(dsIdPro.get(i).equals(key)) {

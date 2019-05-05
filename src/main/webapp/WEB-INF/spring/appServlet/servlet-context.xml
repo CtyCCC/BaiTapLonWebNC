@@ -56,30 +56,52 @@
 	</beans:bean>
 
 
-	<!-- Khai báo sử dụng jdbc trong lớp dao (bây sử dụng lớp đao khác nhớ khai báo thêm cái này) -->
-	<beans:bean id="dao" class="com.ccc.webBH.product.dao.ProductDAO">
-		<beans:property name="template" ref="jt"/>
-	</beans:bean>
+	<!-- Khai báo sử dụng jdbc trong lớp dao (bây sử dụng lớp đao khác nhớ khai 
+		báo thêm cái này) -->
 	
-	<beans:bean id="userdao" class="com.ccc.webBH.management.dao.UserDAO">
-		<beans:property name="template" ref="jt"/>
+	<beans:bean id="dao"
+		class="com.ccc.webBH.product.dao.ProductDAO">
+		<beans:property name="template" ref="jt" />
 	</beans:bean>
-	
-	<beans:bean id="orderdao" class="com.ccc.webBH.management.dao.OrderDAO">
-		<beans:property name="template" ref="jt"/>
+
+	<beans:bean id="userdao"
+		class="com.ccc.webBH.management.dao.UserDAO">
+		<beans:property name="template" ref="jt" />
 	</beans:bean>
-	
-	<beans:bean id="prodao" class="com.ccc.webBH.management.dao.ProDAO">
-		<beans:property name="template" ref="jt"/>
+
+	<beans:bean id="orderdao"
+		class="com.ccc.webBH.management.dao.OrderDAO">
+		<beans:property name="template" ref="jt" />
 	</beans:bean>
+
+	<beans:bean id="prodao"
+		class="com.ccc.webBH.management.dao.ProDAO">
+		<beans:property name="template" ref="jt" />
+	</beans:bean>
+ 
+	 <beans:bean id="accountdao"
+		class="com.ccc.webBH.login.dao.AccountDAO">
+		<beans:property name="template" ref="jt" />
+	</beans:bean>
+
+	<beans:bean id="roleodao"
+		class="com.ccc.webBH.login.dao.RoleDAO">
+		<beans:property name="template" ref="jt" />
+	</beans:bean>  
+
+
 
 	<context:component-scan
-		base-package="com.ccc.webBH.login" />
-
+		base-package="com.ccc.webBH.login.controller" />
+		<context:component-scan
+		base-package="com.ccc.webBH.login.dao" />
+	
 	<context:component-scan
 		base-package="com.ccc.webBH.product.controller" />
-	
+
 	<context:component-scan
-		base-package="com.ccc.webBH.management.controller" />	
+		base-package="com.ccc.webBH.management.controller" />
+
+
 
 </beans:beans>

@@ -2,4 +2,5 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/ccc/webBH/management/controller/ManagementController.java=UTF-8
 encoding//src/main/java/com/ccc/webBH/management/dao/ProDAO.java=UTF-8
 encoding//src/main/java/com/ccc/webBH/management/dao/UserDAO.java=UTF-8
+encoding//src/main/java/com/ccc/webBH/product/controller/HomeController.java=UTF-8
 encoding//src/main/java/com/ccc/webBH/product/dao/ProductDAO.java=UTF-8

@@ -137,8 +137,8 @@
 			<version>4.0</version>
 			<scope>runtime</scope>
 		</dependency>
-		
-		
+
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -146,6 +146,22 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Spring Security Artifacts - START -->
+		<!-- http://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+		<!-- Spring Security Artifacts - END -->
 	</dependencies>
 	<build>
 		<plugins>
