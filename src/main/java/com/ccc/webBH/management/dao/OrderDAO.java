@@ -31,6 +31,16 @@ public class OrderDAO {
 			}
 		});
 	}
+	
+	public ArrayList<OrderDetail> getAllOrderDetail(){
+		String sql = "select * from OrderDetail";
+		return (ArrayList<OrderDetail>) template.query(sql, new RowMapper<OrderDetail>() {
+			public OrderDetail mapRow(ResultSet rs, int row) throws SQLException {
+				OrderDetail odd = new OrderDetail(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5));
+				return odd;
+			}
+		});
+	}
 
 	public ArrayList<OrderDetail> getODDByOrderID(String odId){
 		String sql = "select * from OrderDetail where idOrder = '"+odId+"'";
@@ -41,4 +51,17 @@ public class OrderDAO {
 			}
 		});
 	}
+	
+	//Thêm order
+	public int addOrder(Orders ord) {
+		String sql = "insert into Orders values('"+ord.getIdOrder()+"','"+ord.getIdAcc()+"','"+ord.getDateCreate()+"',"+ord.getTotalPrice()+")";
+		return template.update(sql);		
+	}
+	
+	//Thêm order-detail
+		public int addOrderDetail(OrderDetail ord) {
+			String sql = "insert into OrderDetail values('"+ord.getIdDetail()+"','"+ord.getIdOrder()+"','"+ord.getIdPro()+"',"+ord.getQuantity()+","+ord.getPrice()+")";
+			return template.update(sql);
+			
+		}
 }

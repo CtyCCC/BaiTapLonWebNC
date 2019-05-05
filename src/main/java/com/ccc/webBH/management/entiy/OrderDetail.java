@@ -49,6 +49,11 @@ public class OrderDetail {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "OrderDetail [idDetail=" + idDetail + ", idOrder=" + idOrder + ", idPro=" + idPro + ", quantity="
+				+ quantity + ", price=" + price + "]";
+	}
 	
 	
 

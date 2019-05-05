@@ -1,12 +1,15 @@
 package com.ccc.webBH.product.controller;
 
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ccc.webBH.management.dao.OrderDAO;
+import com.ccc.webBH.management.dao.UserDAO;
+import com.ccc.webBH.management.entiy.Account;
+import com.ccc.webBH.management.entiy.OrderDetail;
+import com.ccc.webBH.management.entiy.Orders;
 import com.ccc.webBH.product.dao.ProductDAO;
 import com.ccc.webBH.product.entity.Cart;
 import com.ccc.webBH.product.entity.Product;
@@ -34,8 +42,23 @@ public class HomeController {
 	@Autowired
 	ProductDAO dao;
 	
+	@Autowired
+	UserDAO userdao;
+	
+	@Autowired
+	OrderDAO orderdao;
+	
 	@GetMapping("/product")
-	public String product(Model model, HttpSession session) {
+	public String product(Model model, HttpSession session,Principal principal) {
+		String isLogin = "not";
+		Account acc = new Account();
+		
+		//Kiểm tra login và đỗ dữ liệu cho user
+		if(principal!= null && !"".equals(principal.getName())) {
+			acc = userdao.getAccountByUserName(principal.getName());
+			isLogin = "ok";
+		}
+		
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		int quan = 0;
 		if(!(cartItems == null)) {
@@ -45,11 +68,21 @@ public class HomeController {
 		model.addAttribute("quantity",quan);
 		model.addAttribute("dsPro", ds);
 		model.addAttribute("cmd", "product");
+		model.addAttribute("isLogin", isLogin);
+		model.addAttribute("user", acc);
 		return "product";
 	}
 	
 	@GetMapping("/phukien")
-	public String phukien(Model model,HttpSession session) {
+	public String phukien(Model model,HttpSession session,Principal principal) {
+		String isLogin = "not";
+		Account acc = new Account();
+		
+		//Kiểm tra login và đỗ dữ liệu cho user
+		if(principal!= null && !"".equals(principal.getName())) {
+			acc = userdao.getAccountByUserName(principal.getName());
+			isLogin = "ok";
+		}
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		int quan = 0;
 		if(!(cartItems == null)) {
@@ -59,17 +92,29 @@ public class HomeController {
 		model.addAttribute("quantity",quan);
 		model.addAttribute("dsPro", ds);
 		model.addAttribute("cmd", "phukien");
+		model.addAttribute("isLogin", isLogin);
+		model.addAttribute("user", acc);
 		return "product";
 	}
 	
 	@GetMapping("/product-detail")
-	public String productDetail(Model model, HttpServletRequest req,HttpSession session){
+	public String productDetail(Model model, HttpServletRequest req,HttpSession session,Principal principal){
+		String isLogin = "not";
+		Account acc = new Account();
+		
+		//Kiểm tra login và đỗ dữ liệu cho user
+		if(principal!= null && !"".equals(principal.getName())) {
+			acc = userdao.getAccountByUserName(principal.getName());
+			isLogin = "ok";
+		}
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		int quan = 0;
 		String idPro = req.getParameter("idPro");
 		Product pr = (Product) dao.getProductById(idPro);
 		model.addAttribute("pro", pr);
 		model.addAttribute("quantity",quan);
+		model.addAttribute("isLogin", isLogin);
+		model.addAttribute("user", acc);
 		return "product-detail";
 	}
 	
@@ -122,7 +167,16 @@ public class HomeController {
 	}
 	
 	@GetMapping("/cart")
-	public String cart(HttpSession session,Model model) {
+	public String cart(HttpSession session,Model model,Principal principal) {
+		String isLogin = "not";
+		Account acc = new Account();
+		
+		//Kiểm tra login và đỗ dữ liệu cho user
+		if(principal!= null && !"".equals(principal.getName())) {
+			acc = userdao.getAccountByUserName(principal.getName());
+			isLogin = "ok";
+		}
+		
 		//Kiá»ƒm tra session
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
 		ArrayList<String> dsIdPro = (ArrayList<String>) session.getAttribute("dsIdPro");
@@ -150,6 +204,8 @@ public class HomeController {
 		model.addAttribute("dsCart", dsCart);
 		model.addAttribute("quantity",dsCart.size());
 		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("isLogin", isLogin);
+		model.addAttribute("user", acc);
 		return "cart";
 	}
 	
@@ -202,7 +258,17 @@ public class HomeController {
 	}
 	
 	@GetMapping("/searchKeyword")
-	public String searchByKeyWord(Model model, HttpSession session, HttpServletRequest req) {
+	public String searchByKeyWord(Model model, HttpSession session, HttpServletRequest req,Principal principal) {
+		
+		String isLogin = "not";
+		Account acc = new Account();
+		
+		//Kiểm tra login và đỗ dữ liệu cho user
+		if(principal!= null && !"".equals(principal.getName())) {
+			acc = userdao.getAccountByUserName(principal.getName());
+			isLogin = "ok";
+		}
+		
 		String keyword = req.getParameter("keyword");
 		String cmd = req.getParameter("cmd");
 		HashMap<String,Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("CartItems");
@@ -214,11 +280,23 @@ public class HomeController {
 		model.addAttribute("quantity",quan);
 		model.addAttribute("dsPro", ds);
 		model.addAttribute("cmd", cmd);
+		model.addAttribute("isLogin", isLogin);
+		model.addAttribute("user", acc);
 		return "product";
 	}
 	
 	@GetMapping("/searchPrice")
-	public String searchByPrice(Model model, HttpSession session, HttpServletRequest req) {
+	public String searchByPrice(Model model, HttpSession session, HttpServletRequest req,Principal principal) {
+		
+		String isLogin = "not";
+		Account acc = new Account();
+		
+		//Kiểm tra login và đỗ dữ liệu cho user
+		if(principal!= null && !"".equals(principal.getName())) {
+			acc = userdao.getAccountByUserName(principal.getName());
+			isLogin = "ok";
+		}
+		
 		double min = Double.parseDouble(req.getParameter("lower"));
 		double max = Double.parseDouble(req.getParameter("upper"));
 		String cmd = req.getParameter("cmd");
@@ -232,6 +310,33 @@ public class HomeController {
 		model.addAttribute("quantity",quan);
 		model.addAttribute("dsPro", ds);
 		model.addAttribute("cmd", cmd);
+		model.addAttribute("isLogin", isLogin);
+		model.addAttribute("user", acc);
 		return "product";
+	}
+	
+	@PostMapping("/datHang")
+	public @ResponseBody String datHang(HttpServletRequest req,HttpSession session) {
+		
+		String userName = req.getParameter("userName");
+		String idAcc = userdao.getAccountByUserName(userName).getIdAcc();
+		String dateCreate = java.time.LocalDate.now().toString();
+		String totalPrice = Integer.parseInt(req.getParameter("totalPrice"))+"";
+		String idOrder = "OD"+(orderdao.getAllOrder().size()+1);
+		Orders newOrd = new Orders(idOrder, idAcc, dateCreate, totalPrice, null);
+		orderdao.addOrder(newOrd);
+				
+		JSONArray dsSp = new JSONArray(req.getParameter("dsSp"));
+		for (int i = 0; i < dsSp.length(); i++) {
+			String idPro = dsSp.getJSONObject(i).getString("idPro");
+			String quantity = Integer.parseInt(dsSp.getJSONObject(i).getString("quantity"))+"";
+			String price = dsSp.getJSONObject(i).getInt("price")+"";
+			String idDetail = "ODD"+(orderdao.getAllOrderDetail().size()+1);
+			OrderDetail newOdd = new OrderDetail(idDetail, idOrder, idPro, quantity, price);
+			orderdao.addOrderDetail(newOdd);			
+		}
+		
+		session.removeAttribute("CartItems");
+		return "OK";
 	}
 }

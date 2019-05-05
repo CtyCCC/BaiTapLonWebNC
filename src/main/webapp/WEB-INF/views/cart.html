@@ -96,21 +96,22 @@
 							<ul class="header-cart-wrapitem">
 								<li class="header-cart-item">
 									<div class="header-cart-item-txt">
-										<a id="tenKH" class="header-cart-item-name font-weight-bold text-danger">
-                                        </a>
+										<a id="tenKH" class="header-cart-item-name font-weight-bold text-danger" th:text="${user.userName}">
+											Nguyễn Văn Mạnh Cường
+										</a>
 									</div>
 								</li>
 
 								<li class="header-cart-item">
 									<div class="header-cart-item-txt">
-										<a id="emailKH" class="header-cart-item-name">
+										<a id="emailKH" class="header-cart-item-name" th:text="${user.email}">
 											cuongfpi1313131@gmail.com
 										</a>
 									</div>
 								</li>
 								<li class="header-cart-item">
 									<div class="header-cart-item-txt">
-										<a id="sdtKH" class="header-cart-item-name">
+										<a id="sdtKH" class="header-cart-item-name" th:text="${user.phone}">
 											0987767216
 										</a>
 									</div>
@@ -121,7 +122,7 @@
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
 									<a href="logout" class="flex-c-m size1 bg1 bo-rad-15 hov1 s-text1 trans-0-4">
-										<button onclick="dx()">Đăng xuất</button>
+										<button style="color:white" >Đăng xuất</button>
 									</a>
 								</div>
 
@@ -130,7 +131,7 @@
 					</div>
 
 					<button id="btndangnhap" class="header-wrapicon1 dis-block">
-						<a href="login">
+						<a href="Login">
 							<img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1" alt="ICON">
 						</a>
 					</button>
@@ -217,8 +218,8 @@
 
 				<div class="size15 trans-0-4">
 					<!-- Button -->
-					<a id="thanhtoan" href="/login">
-						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 pay" onclick="dathang()">
+					<a id="thanhtoan">
+						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 pay" id="btn_dathang">
 							Tiến hành đặt hàng
 						</button>
 					</a>
@@ -234,7 +235,7 @@
 				Copyright © 2018 All rights reserved. | From CCC with <i class="fa fa-heart-o" aria-hidden="true"></i>
 			</div>
 		</div>
-        <p id="islogin" hidden>0</p>
+        <p id="isLogin" th:text="${isLogin}" hidden>0</p>
         <p id="slsp" hidden>0</p>
 	</footer>
 
@@ -259,6 +260,14 @@
 <!--===============================================================================================-->
 	<script type="text/javascript" th:src="@{/public/vendor/select2/select2.min.js}"></script>
 	<script type="text/javascript">
+		
+		if($("#isLogin").text()=="ok"){
+			$("#thongtinKH").removeAttr('hidden');
+			$("#btndangnhap").attr('hidden', 'true');
+		}else {
+			$("#btndangnhap").removeAttr('hidden');
+			$("#thongtinKH").attr('hidden', 'true');
+		}
 
 		//Format tiền 
         function formatNumber(num) {
@@ -442,68 +451,78 @@
 			        });
 				  }
 				})
-               
-                //tinh_tong_tien();
             })
         });
-  //       //tính tổng tiền
-  //       function tinh_tong_tien() {
-  //           var ttt = 0;
-  //           for (var i=0, sl=localStorage.length; i<sl; ++i){
-  //               var key = localStorage.key(i);
-  //               var price = JSON.parse(localStorage.getItem(key)).price;
-  //               var soluong = JSON.parse(localStorage.getItem(key)).sl;
-  //               ttt= ttt+ (price*soluong);
-  //           }
-  //           document.getElementById('tongcart').innerHTML= ttt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" VNĐ";
-  //       }
-		// //click ra ngoài thì ẩn form đăng nhập
-  //       window.onclick = function(event) {
-  //           var modal = document.getElementById('dangnhap');
-  //           if (event.target == modal) {
-  //               modal.style.display = "none";
-  //           }
-  //           var modal2 = document.getElementById('dangky');
-  //           if (event.target == modal2) {
-  //               modal2.style.display = "none";
-  //           }
-  //       }
-  //       function dangky() {
-  //           //ẩn form đăng nhập
-  //           var modal = document.getElementById('dangnhap');
-  //           modal.style.display = "none";
+  		
 
-  //           //hiện form đkí
-  //           document.getElementById('dangky').style.display='block';
-  //       }
+  		//Nút đặt hàng
+  		$("#btn_dathang").click(function(event) {
+  			/* Act on the event */
+  			var isLogin = $("#isLogin").text();
+  			if(isLogin  != "ok"){
+  				Swal.fire({
+				  title: 'Bạn phải đăng nhập để đặt hàng!',
+				  type: 'warning',
+				  confirmButtonText:  'Ok!',
+				  cancelButtonText:  'Canel',
+				  showCancelButton: true,
+				  showCloseButton: true
+				}).then((result) => {
+					if (result.value) {
+						window.location.href='/webBH/Login';
+					}
+				})
+  			}else{
+  				Swal.fire({
+				  title: 'Are you sure?',
+				  text: "Bạn muốn đặt những món hàng này?",
+				  type: 'question',
+				  showCancelButton: true,
+				  confirmButtonText: 'Yes!',
+				  cancelButtonText: 'No, cancel!'
+				}).then((result) => {
+					var postData = [];
+	  				var totalPrice = 0;
+	  				var userName = $("#tenKH").text();  				
+	  				$(".table-row").each(function() {
+	  					var obj = {};
+	  					var idPro = $(this).find('#idpro').text();
+	  					var quantity = $(this).find('#sl_sp_1').val();
+	  					var price = Number($(this).find('#priceSp').text());
+	  					obj.idPro = idPro;
+	  					obj.quantity = quantity;
+	  					obj.price =price;
+	  					postData.push(obj);
+	  					totalPrice += ( (Number(quantity)) * (Number(price)) );
+	  				});
+	  				$.ajax({
+		                url: '/webBH/datHang',
+		                type: 'post',
+		                dataType: 'html',
+		                data: {
+		                    dsSp:JSON.stringify(postData),
+		                    totalPrice:totalPrice,
+		                    userName:userName
+
+		                },
+		                success: function(data){
+					     	Swal.fire(
+					        	  'Đặt hàng thành công!',
+					        	  '',
+					        	  'success'
+					        ).then((result) => {
+								if (result.value) {
+									window.location.href='/webBH/product';
+								}
+							})
+				        }
+		            });
+					
+				})
+  				
+  			}
+  		});
     </script>
-	<script>
-   //      function dx() {
-   //          for(var i =0 ;i<localStorage.length;i++){
-   //              var name= encodeURI(localStorage.key(i));
-   //              var sl = JSON.parse(localStorage.getItem(localStorage.key(i))).sl;
-   //              document.cookie ='id'+i+'='+JSON.stringify({key :name,val :sl});
-   //          }
-   //          localStorage.clear();
-   //      }
-   //      function dathang() {
-   //          var res = document.cookie;
-   //          var multiple = res.split(";");
-   //          if(multiple.length>1){
-   //              for(var i = 0; i < multiple.length; i++) {
-   //                  document.cookie = 'dh'+i+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-   //              }
-			// }
-   //          for(var i =0 ;i<localStorage.length;i++){
-   //              var Key = localStorage.key(i);
-   //              var ten = JSON.parse(localStorage.getItem(Key)).name;
-   //              var sl = Number(JSON.parse(localStorage.getItem(Key)).sl);
-   //              var price = Number(JSON.parse(localStorage.getItem(Key)).price) * sl;
-   //              var name = encodeURI(ten);
-   //              document.cookie ='dh'+i+'='+JSON.stringify({dh :name, sl :sl, price:price});
-   //          }
-   //      }
-	</script>
 <!--===============================================================================================-->
 	<script th:src="@{/public/javascripts/main.js}"></script>
 </body>

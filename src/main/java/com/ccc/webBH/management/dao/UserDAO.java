@@ -80,4 +80,17 @@ public class UserDAO {
 		int count = arr.size()+1;
 		return "ACC"+count+"";
 	}
+	
+	public Account getAccountByUserName(String userName){
+		String sql = "select * from Account where userName = ?";
+		return template.queryForObject(sql,new Object[] {userName}, new RowMapper<Account>() {
+			public Account mapRow(ResultSet rs, int row) throws SQLException {
+				String gender ="Nam";
+				if (rs.getString(7).equals("0")) 
+					gender = "Nữ";
+				Account a = new Account(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), gender, rs.getString(8), rs.getString(9));
+				return a;
+			}
+		});
+	}
 }

@@ -121,7 +121,13 @@
 			<artifactId>thymeleaf</artifactId>
 			<version>3.0.9.RELEASE</version>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
