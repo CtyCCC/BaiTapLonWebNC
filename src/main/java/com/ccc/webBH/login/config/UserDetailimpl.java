@@ -1,9 +1,12 @@
 package com.ccc.webBH.login.config;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -31,16 +34,19 @@ public class UserDetailimpl  implements UserDetailsService{
 
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account acc =accountdao.getInfoAccbyName(username);
-		if(acc == null )
-		{
-			 throw new UsernameNotFoundException("User " + username + " was not found in the database");
-		}
-		String role = roledao.getRolebyCode(acc.getCode());
-		List<GrantedAuthority> listrole =new ArrayList<GrantedAuthority>();
-		listrole.add(new SimpleGrantedAuthority(role));
-		return new User(username,acc.getPass(), listrole);
+	public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException{
+			Account acc = new Account();
+			try {
+				acc = accountdao.getInfoAccbyName(username);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("not acc");
+				throw new UsernameNotFoundException("not acc");
+			}
+			String role = roledao.getRolebyCode(acc.getCode());
+			List<GrantedAuthority> listrole =new ArrayList<GrantedAuthority>();
+			listrole.add(new SimpleGrantedAuthority(role));
+			return new User(username,acc.getPass(), listrole);
 	}
 	
 
