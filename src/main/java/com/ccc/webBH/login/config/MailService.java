@@ -1,5 +1,6 @@
 package com.ccc.webBH.login.config;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.mail.MessagingException;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.ccc.webBH.product.entity.FormMail;
+
 
 @Service
 
@@ -25,11 +28,12 @@ public class MailService {
   TemplateEngine templateEngine;
   
   
-  public void sendEmail(String subject, String message, String recipientEmail) throws MessagingException {
+  public void sendEmail(String subject, ArrayList<FormMail> dsSP, String recipientEmail,String totalPrice) throws MessagingException {
     Locale locale = LocaleContextHolder.getLocale();
     // Prepare the evaluation context
     Context ctx = new Context(locale);
-    ctx.setVariable("message", message);
+    ctx.setVariable("dsPro", dsSP);
+    ctx.setVariable("totalPrice", totalPrice);
     
     // Prepare message using a Spring helper
     MimeMessage mimeMessage = mailSender.createMimeMessage();

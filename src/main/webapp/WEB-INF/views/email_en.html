@@ -20,30 +20,20 @@
 					<th>Tên Sản Phẩm</th>
 					<th>Số lượng</th>
 					<th>Đơn giá</th>
+					<th>Thành tiền</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>John</td>
-					<td>John</td>
-					<td>Doe</td>
-					<td>john@example.com</td>
-				</tr>
-				<tr>
-					<td>John</td>
-					<td>Mary</td>
-					<td>Moe</td>
-					<td>mary@example.com</td>
-				</tr>
-				<tr>
-					<td>John</td>
-					<td>July</td>
-					<td>Dooley</td>
-					<td>july@example.com</td>
+				<tr th:each="Pros : ${dsPro}" style="text-align: center">
+					<td th:text="${Pros.idSP}">John</td>
+					<td th:text="${Pros.nameSP}">John</td>
+					<td th:text="${Pros.quantity}">Doe</td>
+					<td th:text="${Pros.price}" class="price">john@example.com</td>
+					<td th:text="${Pros.tt}" class="tt">john@example.com</td>
 				</tr>
 			</tbody>
-		</table>
+		</table><br>
+		<div style="font-weight: bold;">Tổng tiền: </div><span style="font-weight: bold;" type="text" th:text="${totalPrice}"></span>
 	</div>
-
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ccc.webBH.login.config.MailService;
+import com.ccc.webBH.login.entity.MailBox;
 import com.ccc.webBH.management.dao.OrderDAO;
 import com.ccc.webBH.management.dao.UserDAO;
 import com.ccc.webBH.management.entiy.Account;
@@ -30,6 +33,7 @@ import com.ccc.webBH.management.entiy.OrderDetail;
 import com.ccc.webBH.management.entiy.Orders;
 import com.ccc.webBH.product.dao.ProductDAO;
 import com.ccc.webBH.product.entity.Cart;
+import com.ccc.webBH.product.entity.FormMail;
 import com.ccc.webBH.product.entity.Product;
 
 /**
@@ -47,6 +51,9 @@ public class HomeController {
 	
 	@Autowired
 	OrderDAO orderdao;
+	
+	@Autowired
+	MailService mailService;
 	
 	@GetMapping("/")
 	public String product(Model model, HttpSession session,Principal principal) {
@@ -316,27 +323,42 @@ public class HomeController {
 	}
 	
 	@PostMapping("/datHang")
-	public @ResponseBody String datHang(HttpServletRequest req,HttpSession session) {
+	public @ResponseBody String datHang(HttpServletRequest req,HttpSession session) throws MessagingException{
 		
 		String userName = req.getParameter("userName");
 		String idAcc = userdao.getAccountByUserName(userName).getIdAcc();
 		String dateCreate = java.time.LocalDate.now().toString();
-		String totalPrice = Integer.parseInt(req.getParameter("totalPrice"))+"";
+		int totalPrice = Integer.parseInt(req.getParameter("totalPrice"));
 		String idOrder = "OD"+(orderdao.getAllOrder().size()+1);
-		Orders newOrd = new Orders(idOrder, idAcc, dateCreate, totalPrice, null);
+		Orders newOrd = new Orders(idOrder, idAcc, dateCreate, totalPrice+"", null);
 		orderdao.addOrder(newOrd);
 				
 		JSONArray dsSp = new JSONArray(req.getParameter("dsSp"));
+		ArrayList<FormMail> dsformMail = new ArrayList<FormMail>(); 
 		for (int i = 0; i < dsSp.length(); i++) {
 			String idPro = dsSp.getJSONObject(i).getString("idPro");
-			String quantity = Integer.parseInt(dsSp.getJSONObject(i).getString("quantity"))+"";
-			String price = dsSp.getJSONObject(i).getInt("price")+"";
+			int quantity = Integer.parseInt(dsSp.getJSONObject(i).getString("quantity"));
+			int price = dsSp.getJSONObject(i).getInt("price");
 			String idDetail = "ODD"+(orderdao.getAllOrderDetail().size()+1);
-			OrderDetail newOdd = new OrderDetail(idDetail, idOrder, idPro, quantity, price);
-			orderdao.addOrderDetail(newOdd);			
+			OrderDetail newOdd = new OrderDetail(idDetail, idOrder, idPro, quantity+"", price+"");
+			orderdao.addOrderDetail(newOdd);
+			
+			String tt = String.format("%,d", price*quantity)+"$";
+			FormMail  form = new FormMail(idPro, dao.getProductById(idPro).getNamePro(), quantity+"", String.format("%,d", price)+"$", tt);
+			dsformMail.add(form);
 		}
+		
+		
+		
+	    mailService.sendEmail("Thông báo đặt hàng thành công", dsformMail, userdao.getAccountByUserName(userName).getEmail(),String.format("%,d", totalPrice)+"$");
 		
 		session.removeAttribute("CartItems");
 		return "OK";
 	}
+	
+	@GetMapping("/sendEmail")
+	  public String sendEmail (final Model model)  {
+		
+	    return "test";
+	  }
 }

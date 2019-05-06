@@ -32,8 +32,6 @@ public class LoginController {
 	@Autowired
 	UserDAO userdao;
 	
-	@Autowired
-	 MailService mailService;
 	
 	@GetMapping("/Login")
 	public String showLogin(Model modal) {
@@ -57,12 +55,7 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/sendEmail")
-	  public String sendEmail (final Model model) throws MessagingException {
-		MailBox mailbox = new MailBox("Thông báo đặt hàng", "Bạn đã đặt hàng thành công", "cuongfbi1314@gmail.com");
-	    mailService.sendEmail(mailbox.getSubject(), mailbox.getMessage(), mailbox.getRecipientEmail());
-	    return "test";
-	  }
+	
 	
 	 private void authenticateUserAndSetSession(Account user, HttpServletRequest request) {
 	        String username = user.getUserName();
