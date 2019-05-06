@@ -22,7 +22,7 @@ public class OrderDAO {
 	}
 
 	public ArrayList<Orders> getAllOrder(){
-		String sql = "select * from Orders order by dateCreate";
+		String sql = "select * from Orders order by dateCreate DESC";
 		return (ArrayList<Orders>) template.query(sql, new RowMapper<Orders>() {
 			public Orders mapRow(ResultSet rs, int row) throws SQLException {
 				ArrayList<OrderDetail> arrODD = getODDByOrderID(rs.getString(1));

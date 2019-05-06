@@ -71,7 +71,7 @@
                     <nav class="menu">
                         <ul class="main_menu">
                             <li>
-                                <a href="/webBH/product">Trang chủ</a>
+                                <a href="/webBH/">Trang chủ</a>
                             </li>
                             <li>
                                 <a href="/webBH/productMgmt" >Quản Lý Sản Phẩm</a>
@@ -178,12 +178,12 @@
                 <input id="phone" readonly type="number" class="form-control" placeholder="Nhập số điện thoại..." min="1111111" required="required">
             </div>
             
-            <div class="form-row col-xs-4">
+            <div class="form-row col-xs-3">
                 <label>Email: </label>
                 <input id="email" readonly type="email" class="form-control" placeholder="Enter email..." required="required">
             </div>
             
-            <div class="form-row col-xs-1">
+            <div class="form-row col-xs-2">
              	<label>Gới tính: </label>
                 <select class="form-control" id="gender"  disabled style="height: 35px">
                 	<option value="Nam">Nam</option>
@@ -295,6 +295,7 @@ $(document).ready(function(){
         $("#btnSua").removeAttr('hidden');
         $("#btnHuy").attr('hidden','true');
         $("#btnLuuThem").attr('hidden','true');
+        $("#btnLuuSua").attr('hidden','true');
         
         $("#nameCus").attr('readonly','true');
         $("#gender").attr('disabled','true');
@@ -344,6 +345,7 @@ $(document).ready(function(){
 		$("#btnSua").attr('hidden','true');
 		$("#btnXoa").attr('hidden','true');
 		$("#btnLuuThem").removeAttr('hidden');
+		$("#btnLuuSua").attr('hidden','true');
 		
 		$("#nameCus").removeAttr('readonly');
         $("#gender").removeAttr('disabled');
@@ -394,20 +396,22 @@ $(document).ready(function(){
         //var role = $("#role").val();
         //var pass = $("#pass").val();
   		
-        if (confirm('Bạn muốn lưu không?')){
-			$.ajax({
-		        type: "post",
-		        url: "/webBH/editAcc",  
-		        data: { idAcc: idAcc , nameCus :nameCus, gender : gender, phone: phone, email:email, address:address},
-		        success: function(){
-		        	console.log("send success to server");
-		        	location.reload();
-		        },
-		        error: function(){      
-		         alert('Error while request..');
-		        }
-			});
-		}
+        if (validateWithoutSubmitEdit()){
+        	if (confirm('Bạn muốn lưu không?')){
+    			$.ajax({
+    		        type: "post",
+    		        url: "/webBH/editAcc",  
+    		        data: { idAcc: idAcc , nameCus :nameCus, gender : gender, phone: phone, email:email, address:address},
+    		        success: function(){
+    		        	console.log("send success to server");
+    		        	location.reload();
+    		        },
+    		        error: function(){      
+    		         alert('Error while request..');
+    		        }
+    			});
+    		}
+        }
     });
 	
 	$("#btnLuuThem").click(function() {
@@ -439,7 +443,7 @@ $(document).ready(function(){
         }
     });
 	
-	
+	//login 
 	if($("#isLogin").text()=="ok"){
 		$("#thongtinKH").removeAttr('hidden');
 		$("#btndangnhap").attr('hidden', 'true');
@@ -451,8 +455,9 @@ $(document).ready(function(){
 });
 
 
-
+//validate add new
 function validateWithoutSubmit() {
+	
 	  var name = document.getElementById("nameCus");
 	  var phone = document.getElementById("phone");
 	  var email = document.getElementById("email");
@@ -463,31 +468,9 @@ function validateWithoutSubmit() {
 	  var regUser =  /^[A-Za-z0-9_\.]{8,32}$/;
 	  var regSDT = /[0]\d{9}/;
 	  
-	  var listEmail = [];
 	  var listUser = [];
-      //Lấy all email để so sánh trùng
-      $('#example1 tr').each(function() {
-      	var id = $(this).find("td:eq(4)").html();
-     	listEmail.push(id+"");
-       });
-    	  
-      //Lấy all user để so sánh trùng
-      $('#example1 tr').each(function() {
-    	 var id = $(this).find("td:eq(5)").html();
-    	 listUser.push(id+"");
-      });
-      
-      jQuery.each( listUser, function( i, val ) {//lặp mảng
-      	if (val == user.value)
-      		alert('Tài khoản đã tồn tại, nhập một tài khoản khác !!');
-      		return false;
-      });
-      
-      jQuery.each( listEmail, function( i, val ) {//lặp mảng
-        	if (val == email.value)
-        		alert('Email đã tồn tại, nhập một email khác !!');
-        		return false;
-      });
+	  var listEmail = [];
+	  var breakOut;
         
 	  if (!name.checkValidity()){
 		    alert('Tên khách hàng là bắt buộc !!');
@@ -510,9 +493,68 @@ function validateWithoutSubmit() {
 	    return false;
 	  }
 	  if (!regUser.test(pass.value)){
-	    alert('Mật khẩu không hợp lệ !!');
+	    alert('Mật khẩu không hợp lệ !! (8-32)');
 	    return false;
 	  } 
+	  //Lấy all user để so sánh trùng
+      $('#example1 tr').each(function() {
+    	 var tk = $(this).find("td:eq(5)").html();
+    	 listUser.push(tk+"");
+      });
+      jQuery.each( listUser, function( i, val ) {//lặp mảng
+      	if (val == user.value){
+      		alert('Tài khoản đã tồn tại, nhập một tài khoản khác !!');
+      		breakOut = true;
+      		return false;	
+      	}
+      });
+      
+      //Lấy all email để so sánh trùng
+      $('#example1 tr').each(function() {
+    	 var mail = $(this).find("td:eq(4)").html();
+    	 listEmail.push(mail+"");
+      });
+      jQuery.each(listEmail, function( i, val ) {//lặp mảng
+      	if (val == email.value){
+      		alert('Email này đã tồn tại, nhập một email khác !!');
+      		breakOut = true;
+      		return false;
+      	}
+      });
+      if(breakOut) {
+    	  breakOut = false;
+    	  return false;
+      } 
+      
+	  return true;
+} 
+//validate edit
+function validateWithoutSubmitEdit() {
+	
+	  var name = document.getElementById("nameCus");
+	  var phone = document.getElementById("phone");
+	  var email = document.getElementById("email");
+	  var addr = document.getElementById("address");
+	  
+	  var regSDT = /[0]\d{9}/;
+        
+	  if (!name.checkValidity()){
+		    alert('Tên khách hàng là bắt buộc !!');
+		    return false;
+	  }
+	  if (!regSDT.test(phone.value)) {
+		    alert('SDT ko hợp lệ !!');
+		    return false;
+	  }
+	  if (!email.checkValidity()){
+		    alert('Email không hợp lệ !!');
+		    return false;
+	  }
+	  if (!addr.checkValidity()){
+	    alert('Địa chỉ là bắt buộc !!');
+	    return false;
+	  }
+      
 	  return true;
 } 
 </script>
