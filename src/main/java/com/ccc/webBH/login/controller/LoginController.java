@@ -1,5 +1,6 @@
 package com.ccc.webBH.login.controller;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.ccc.webBH.login.config.MailService;
 import com.ccc.webBH.login.config.UserDetailimpl;
+import com.ccc.webBH.login.entity.MailBox;
 import com.ccc.webBH.management.dao.UserDAO;
 import com.ccc.webBH.management.entiy.Account;
 
@@ -29,6 +32,8 @@ public class LoginController {
 	@Autowired
 	UserDAO userdao;
 	
+	@Autowired
+	 MailService mailService;
 	
 	@GetMapping("/Login")
 	public String showLogin(Model modal) {
@@ -45,6 +50,19 @@ public class LoginController {
 		authenticateUserAndSetSession(acc,req);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/LoginError")
+	public String showLoginFail(Model model) {
+		model.addAttribute("error","Tài khoản hoặc mật khẩu không đúng");
+		return "login";
+	}
+	
+	@GetMapping("/sendEmail")
+	  public String sendEmail (final Model model) throws MessagingException {
+		MailBox mailbox = new MailBox("Thông báo đặt hàng", "Bạn đã đặt hàng thành công", "cuongfbi1314@gmail.com");
+	    mailService.sendEmail(mailbox.getSubject(), mailbox.getMessage(), mailbox.getRecipientEmail());
+	    return "test";
+	  }
 	
 	 private void authenticateUserAndSetSession(Account user, HttpServletRequest request) {
 	        String username = user.getUserName();

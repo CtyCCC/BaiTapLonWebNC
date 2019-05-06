@@ -2,12 +2,13 @@ package com.ccc.webBH.login.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 public class ConfigInit extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] {UserDetailimpl.class,SecurityConfig.class};
+		return new Class[] {UserDetailimpl.class,SecurityConfig.class,MailService.class};
 	}
 
 	@Override
