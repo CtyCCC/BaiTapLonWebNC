@@ -48,7 +48,7 @@ public class HomeController {
 	@Autowired
 	OrderDAO orderdao;
 	
-	@GetMapping("/product")
+	@GetMapping("/")
 	public String product(Model model, HttpSession session,Principal principal) {
 		String isLogin = "not";
 		Account acc = new Account();

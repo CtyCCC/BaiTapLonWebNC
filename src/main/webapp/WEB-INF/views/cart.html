@@ -63,7 +63,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="/" class="logo">
+				<a th:href="@{/}" class="logo">
 					<img th:src="@{/public/images/icons/lg.png}" alt="IMG-LOGO">
 				</a>
 
@@ -72,7 +72,7 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="product">Trang chủ</a>
+								<a th:href="@{/}">Trang chủ</a>
 							</li>
 
 							<li style="text-shadow: 1px 1px grey">
@@ -414,6 +414,37 @@
 			        })
 
 			        downTotalPrice(price);
+            	}else{
+            		var key = $(this).parent().parent().parent().find('#idpro').text();
+            		Swal.fire({
+					  title: 'Are you sure?',
+					  text: "You won't be able to revert this!",
+					  type: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes, delete it!'
+					}).then((result) => {
+					  if (result.value) {
+					     $.ajax({
+				            url: '/webBH/deleteCart',
+				            type: 'post',
+				            dataType: 'html',
+				            data: {
+					            key:key
+				            },
+				            success: function(data){
+					        	Swal.fire(
+					              'Items has deleted!',
+					              '',
+					              'success'
+					            ).then((result) =>{
+					              location.reload();
+					            });
+				        	}
+				        });
+					  }
+					})
             	}   	
             })
         });
@@ -512,7 +543,7 @@
 					        	  'success'
 					        ).then((result) => {
 								if (result.value) {
-									window.location.href='/webBH/product';
+									window.location.href='/webBH/';
 								}
 							})
 				        }

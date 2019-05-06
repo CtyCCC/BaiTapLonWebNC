@@ -43,7 +43,7 @@ public class LoginController {
 		acc.setIdAcc("not");
 		userdao.addNew(acc);
 		authenticateUserAndSetSession(acc,req);
-		return "redirect:/product";
+		return "redirect:/";
 	}
 	
 	 private void authenticateUserAndSetSession(Account user, HttpServletRequest request) {
