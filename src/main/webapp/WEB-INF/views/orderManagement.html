@@ -82,7 +82,8 @@
 
                             <li >
                                 <a href="/webBH/userMgmt">Quản Lý Khách hàng</a>
-                            </li>                        </ul>
+                            </li>                        
+                       </ul>
                     </nav>
                 </div>
 
@@ -93,28 +94,29 @@
                         <!-- Header cart noti -->
                         <div class="header-cart header-dropdown">
                             <ul class="header-cart-wrapitem">
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-txt">
-                                        <a id="tenKH" class="header-cart-item-name font-weight-bold text-danger">
-                                        </a>
-                                    </div>
-                                </li>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="tenKH" class="header-cart-item-name font-weight-bold text-danger" th:text="${user.userName}">
+											Nguyễn Văn Mạnh Cường
+										</a>
+									</div>
+								</li>
 
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-txt">
-                                        <a id="emailKH" class="header-cart-item-name">
-                                            cuongfpi1313131@gmail.com
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-txt">
-                                        <a id="sdtKH" class="header-cart-item-name">
-                                            0987767216
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="emailKH" class="header-cart-item-name" th:text="${user.email}">
+											cuongfpi1313131@gmail.com
+										</a>
+									</div>
+								</li>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="sdtKH" class="header-cart-item-name" th:text="${user.phone}">
+											0987767216
+										</a>
+									</div>
+								</li>
+							</ul>
 
                             <div class="header-cart-buttons">
                                 <div class="header-cart-wrapbtn">
@@ -148,60 +150,60 @@
     <div class="container-fluid" style="padding: 2%">
 
 
-        <div class="col-xs-12 border border-primary" style="padding-top:2%">
+        <div class="col-xs-12 border border-primary" style="padding-top:1%; padding-bottom : 1%">
             <form class="col-xs-5">
-            <div class="form-row col-xs-3">
+            <div class="form-row col-xs-3" hidden="">
                 <label>ID: </label>
                 <input id="idOrder" readonly type="text" class="form-control">
             </div>
-            <div class="form-row col-xs-4">
-                <label>Ngày mua:</label>
-                <input id="date" readonly type="text" class="form-control">
-            </div>
-            <div class="form-row col-xs-5">
+            <div class="form-row col-xs-7">
                 <label>Tài khoản: </label>
                 <input id="user" readonly type="text" class="form-control">
+            </div>
+            <div class="form-row col-xs-5">
+                <label>Ngày mua:</label>
+                <input id="date" readonly type="text" class="form-control">
             </div>
             <div class="form-row col-xs-7">
                 <label>Tổng tiền: </label>
                 <input id="totalPrice" readonly type="text" class="form-control">
             </div>
-            <div class="form-row col-xs-5">
+            <div class="form-row col-xs-5" id="frameQuantity" hidden="">
                 <label>Sửa số lượng: </label>
-                <input id="quantity" readonly type="number" class="form-control" hidden="">
-                <input id="idDetail" readonly type="text" class="form-control" >
+                <div class="col-xs-8">
+                	<input id="quantity"  type="number" class="form-control" >
+                </div>
+                <div class="col-xs-2">
+                	<button class="btn btn-default" id="btnEdit"><i class="fa fa-edit"></i></button>
+                </div>
+                <div class="col-xs-2">
+                	<button class="btn btn-default" id="btnSave"><i class="fa fa-save"></i></button>
+                </div>
             </div>
         </form>
         
-        <div class="col-xs-7">
+        <div class="col-xs-7" id="placeLoad">
+        <div id="reloadThis">
             <label>Danh sách các sản phẩm: </label>
             <table id="tableOrderDetail" class="table table-bordered table-hover">
               <thead>
               <tr>
                 <th>ID </th>
-                <th>Tên sản phẩm</th>   
-                <th>Nhà cung cấp</th> 
+                <th>ID sản phẩm</th>
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>03</td>
-                <td>BMW i8</td>
-                <td>BMW</td>
-                <td>1</td>                  
-                <td>56782</td>
-              </tr>
-              <tr>
-                <td>04</td>
-                <td>Bạt phủ xe</td>
-                <td>mr a</td>
-                <td>2</td>                  
-                <td>7654</td>             
+              <tr th:if="${listOrderDetail != null}" th:each="ac : ${listOrderDetail}" >
+                <td th:text="${ac.idDetail}">ACC1</td>
+                <td th:text="${ac.idPro}">Nguyễn Văn Chiến</td>
+                <td th:text="${ac.quantity}">Nam</td>
+                <td th:text="${ac.price}">0794343226</td>
               </tr>
               </tbody>
             </table>
+        </div>
         </div>
         </div>
 
@@ -244,6 +246,8 @@
         <div class="t-center s-text8 p-t-20">
             Copyright © 2018 All rights reserved. | From CCC with <i class="fa fa-heart-o" aria-hidden="true"></i>
         </div>
+        <p id="isLogin" th:text="${isLogin}" hidden="">0</p>
+        <p id="isAdmin" th:text="${user.code}" hidden="">0</p>
     </div>
 </footer>
 
@@ -269,14 +273,35 @@ $(document).ready(function(){
         var total= $(this).find("td:eq(3)").text();
         var arr = $(this).find("td:eq(4)").text();
         
-        $("#idDetail").val(arr);
         $("#idOrder").val(idOd);
         $("#date").val(date);
         $("#user").val(idAcc);
         $("#totalPrice").val(total);
         
+        $.ajax({
+	        type: "post",
+	        url: "/webBH/fillODDTable",  
+	        data:{ idOrder: idOd, chien : "chien"},
+	        success: function(){
+	        	console.log("send success to server");
+	        	//location.reload();
+	        	$("#placeLoad").load("orderMgmt #reloadThis");
+	        },
+	        error: function(){      
+	         alert('Error while request..');
+	        }
+		});
        
     });
+	
+	if($("#isLogin").text()=="ok"){
+		$("#thongtinKH").removeAttr('hidden');
+		$("#btndangnhap").attr('hidden', 'true');
+	}else {
+		$("#btndangnhap").removeAttr('hidden');
+		$("#thongtinKH").attr('hidden', 'true');
+	}
+	
 });
 </script>
 </body>

@@ -45,12 +45,9 @@ public class UserDAO {
 		return kq;
 	}
 	
-	public int updateAcc (Account ac) {
-		int gender = 0;
-		if (ac.getGender().equals("Nam"))
-			gender = 1;
-		String sql = "update Account set code = '"+ac.getCode()+"', userName = '"+ac.getUserName()+"', pass = '"+ac.getPass()+"', nameCus = N'"+ac.getNameCus()+
-				"', email = '"+ac.getEmail()+"', gender = "+gender+", phone = '"+ac.getPhone()+"', addresss = N'"+ac.getAddress()+ "' where idAcc = '"+ac.getIdAcc()+"'";
+	public int updateAcc (String idAcc, String nameCus, String email, String phone, int gender, String address) {
+		String sql = "update Account set nameCus = N'"+nameCus+
+				"', email = '"+email+"', gender = "+gender+", phone = '"+phone+"', addresss = N'"+address+ "' where idAcc = '"+idAcc+"'";
 		
 		int kq = 0;
 		try {
@@ -93,4 +90,23 @@ public class UserDAO {
 			}
 		});
 	}
+	public ArrayList<String> getAllUserName(){
+		String sql = "select userName from Account";
+		return (ArrayList<String>) template.query(sql, new RowMapper<String>() {
+			public String mapRow(ResultSet rs, int row) throws SQLException {
+				String user = rs.getString(1);
+				return user;
+			}
+		});
+	}
+	public ArrayList<String> getAllEmail(){
+		String sql = "select email from Account";
+		return (ArrayList<String>) template.query(sql, new RowMapper<String>() {
+			public String mapRow(ResultSet rs, int row) throws SQLException {
+				String email = rs.getString(1);
+				return email;
+			}
+		});
+	}
+	
 }

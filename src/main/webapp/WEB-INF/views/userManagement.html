@@ -95,28 +95,29 @@
                         <!-- Header cart noti -->
                         <div class="header-cart header-dropdown">
                             <ul class="header-cart-wrapitem">
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-txt">
-                                        <a id="tenKH" class="header-cart-item-name font-weight-bold text-danger">
-                                        </a>
-                                    </div>
-                                </li>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="tenKH" class="header-cart-item-name font-weight-bold text-danger" th:text="${user.userName}">
+											Nguyễn Văn Mạnh Cường
+										</a>
+									</div>
+								</li>
 
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-txt">
-                                        <a id="emailKH" class="header-cart-item-name">
-                                            cuongfpi1313131@gmail.com
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-txt">
-                                        <a id="sdtKH" class="header-cart-item-name">
-                                            0987767216
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="emailKH" class="header-cart-item-name" th:text="${user.email}">
+											cuongfpi1313131@gmail.com
+										</a>
+									</div>
+								</li>
+								<li class="header-cart-item">
+									<div class="header-cart-item-txt">
+										<a id="sdtKH" class="header-cart-item-name" th:text="${user.phone}">
+											0987767216
+										</a>
+									</div>
+								</li>
+							</ul>
 
                             <div class="header-cart-buttons">
                                 <div class="header-cart-wrapbtn">
@@ -131,7 +132,7 @@
                     </div>
 
                     <button id="btndangnhap" class="header-wrapicon1 dis-block">
-                        <a href="login">
+                        <a href="Login">
                             <img th:src="@{/public/images/icons/icon-header-01.png}" class="header-icon1" alt="ICON">
                         </a>
                     </button>
@@ -169,38 +170,47 @@
             
             <div class="form-row col-xs-4">
                 <label>Tên khách hàng: </label>
-                <input id="nameCus" readonly type="text" class="form-control" placeholder="Nhập tên khách hàng...">
+                <input id="nameCus" readonly type="text" class="form-control" placeholder="Nhập tên khách hàng..." required="required">
             </div>
-            <div class="form-row col-xs-1">
-                <label>Giới tính: </label>
-                <input id="gender" readonly type="text" class="form-control" placeholder="Nam/Nữ">
-            </div>
+            
             <div class="form-row col-xs-3">
                 <label>SDT: </label>
-                <input id="phone" readonly type="text" class="form-control" placeholder="Nhập số điện thoại...">
+                <input id="phone" readonly type="number" class="form-control" placeholder="Nhập số điện thoại..." min="1111111" required="required">
             </div>
+            
             <div class="form-row col-xs-4">
                 <label>Email: </label>
-                <input id="email" readonly type="text" class="form-control" placeholder="Enter email...">
+                <input id="email" readonly type="email" class="form-control" placeholder="Enter email..." required="required">
             </div>
+            
+            <div class="form-row col-xs-1">
+             	<label>Gới tính: </label>
+                <select class="form-control" id="gender"  disabled style="height: 35px">
+                	<option value="Nam">Nam</option>
+                	<option value="Nữ">Nữ</option>
+                </select>
+            </div>
+            
+            
             <div class="form-row col-xs-4">
                 <label>Tài khoản: </label>
-                <input id="user" readonly type="text" class="form-control" placeholder="Tên đăng nhập...">
+                <input id="user" readonly type="text" class="form-control" placeholder="Tên đăng nhập..." required="required">
             </div>
             <div class="form-row col-xs-8">
                 <label>Địa chỉ: </label>
-                <input id="address" readonly type="text" class="form-control" placeholder="Nhập địa chỉ...">
+                <input id="address" readonly type="text" class="form-control" placeholder="Nhập địa chỉ..." required="required">
             </div>
+            
             <div class="form-row col-xs-2">
              	<label>Loại user: </label>
                 <select class="form-control" id="role" style="height: 35px" disabled>
-                	<option>ADM</option>
                 	<option>CUS</option>
+                	<option>ADM</option>
                 </select>
             </div>
             <div class="form-row col-xs-2" id="framepass" hidden="">
                 <label>Password: </label>
-                <input id="pass" type="password" class="form-control" placeholder="Nhập mật khẩu...">
+                <input id="pass" type="password" class="form-control" placeholder="Nhập mật khẩu..." required="required">
             </div>
         </form>
     
@@ -258,6 +268,8 @@
         <div class="t-center s-text8 p-t-20">
             Copyright © 2018 All rights reserved. | From CCC with <i class="fa fa-heart-o" aria-hidden="true"></i>
         </div>
+        <p id="isLogin" th:text="${isLogin}" hidden="">0</p>
+        <p id="isAdmin" th:text="${user.code}" hidden="">0</p>
     </div>
 </footer>
 
@@ -285,7 +297,7 @@ $(document).ready(function(){
         $("#btnLuuThem").attr('hidden','true');
         
         $("#nameCus").attr('readonly','true');
-        $("#gender").attr('readonly','true');
+        $("#gender").attr('disabled','true');
         $("#phone").attr('readonly','true');
         $("#email").attr('readonly','true');
         $("#address").attr('readonly','true');
@@ -319,12 +331,12 @@ $(document).ready(function(){
 		$("#btnXoa").attr('hidden','true');
 		
 		$("#nameCus").removeAttr('readonly');
-        $("#gender").removeAttr('readonly');
+        $("#gender").removeAttr('disabled');
         $("#phone").removeAttr('readonly');
         $("#email").removeAttr('readonly');
         $("#address").removeAttr('readonly');
-        $("#user").removeAttr('readonly');
-        $("#role").removeAttr('disabled');
+        //$("#user").removeAttr('readonly');
+        //$("#role").removeAttr('disabled');
     });
 	$("#btnThem").click(function() {
 		$("#btnHuy").removeAttr('hidden');
@@ -334,7 +346,7 @@ $(document).ready(function(){
 		$("#btnLuuThem").removeAttr('hidden');
 		
 		$("#nameCus").removeAttr('readonly');
-        $("#gender").removeAttr('readonly');
+        $("#gender").removeAttr('disabled');
         $("#phone").removeAttr('readonly');
         $("#email").removeAttr('readonly');
         $("#address").removeAttr('readonly');
@@ -342,12 +354,10 @@ $(document).ready(function(){
         $("#role").removeAttr('disabled');
 		
         $("#nameCus").val("");
-        $("#gender").val("");
         $("#phone").val("");
         $("#email").val("");
         $("#address").val("");
         $("#user").val("");
-        $("#role").val("");
         $("#pass").val("");
     });
 	
@@ -380,15 +390,15 @@ $(document).ready(function(){
         var phone = $("#phone").val();
         var email = $("#email").val();
         var address = $("#address").val();
-        var user = $("#user").val();
-        var role = $("#role").val();
-        var pass = $("#pass").val();
+        //var user = $("#user").val();
+        //var role = $("#role").val();
+        //var pass = $("#pass").val();
   		
         if (confirm('Bạn muốn lưu không?')){
 			$.ajax({
 		        type: "post",
 		        url: "/webBH/editAcc",  
-		        data:{ idAcc: idAcc , nameCus :nameCus, gender : gender, phone: phone, email:email, address:address, user: user, role:role, pass: pass},
+		        data: { idAcc: idAcc , nameCus :nameCus, gender : gender, phone: phone, email:email, address:address},
 		        success: function(){
 		        	console.log("send success to server");
 		        	location.reload();
@@ -411,24 +421,100 @@ $(document).ready(function(){
         var role = $("#role").val();
         var pass = $("#pass").val();
         
-        if (confirm('Bạn muốn lưu không?')){
-			$.ajax({
-		        type: "post",
-		        url: "/webBH/addAcc",  
-		        data:{ nameCus :nameCus, gender : gender, phone: phone, email:email, address:address, user: user, role:role, pass: pass},
-		        success: function(){
-		        	console.log("send success to server");
-		        	location.reload();
-		        },
-		        error: function(){      
-		         alert('Error while request..');
-		        }
-			});
-		}
+        if (validateWithoutSubmit()){
+        	if (confirm('Bạn muốn lưu không?')){
+    			$.ajax({
+    		        type: "post",
+    		        url: "/webBH/addAcc",  
+    		        data: { nameCus :nameCus, gender : gender, phone: phone, email:email, address:address, user: user, role:role, pass: pass},
+    		        success: function(){
+    		        	console.log("send success to server");
+    		        	location.reload();
+    		        },
+    		        error: function(){      
+    		         alert('Error while request..');
+    		        }
+    			});
+    		}
+        }
     });
 	
 	
+	if($("#isLogin").text()=="ok"){
+		$("#thongtinKH").removeAttr('hidden');
+		$("#btndangnhap").attr('hidden', 'true');
+	}else {
+		$("#btndangnhap").removeAttr('hidden');
+		$("#thongtinKH").attr('hidden', 'true');
+	}
+	
 });
+
+
+
+function validateWithoutSubmit() {
+	  var name = document.getElementById("nameCus");
+	  var phone = document.getElementById("phone");
+	  var email = document.getElementById("email");
+	  var user = document.getElementById("user");
+	  var addr = document.getElementById("address");
+	  var pass = document.getElementById("pass");
+	  
+	  var regUser =  /^[A-Za-z0-9_\.]{8,32}$/;
+	  var regSDT = /[0]\d{9}/;
+	  
+	  var listEmail = [];
+	  var listUser = [];
+      //Lấy all email để so sánh trùng
+      $('#example1 tr').each(function() {
+      	var id = $(this).find("td:eq(4)").html();
+     	listEmail.push(id+"");
+       });
+    	  
+      //Lấy all user để so sánh trùng
+      $('#example1 tr').each(function() {
+    	 var id = $(this).find("td:eq(5)").html();
+    	 listUser.push(id+"");
+      });
+      
+      jQuery.each( listUser, function( i, val ) {//lặp mảng
+      	if (val == user.value)
+      		alert('Tài khoản đã tồn tại, nhập một tài khoản khác !!');
+      		return false;
+      });
+      
+      jQuery.each( listEmail, function( i, val ) {//lặp mảng
+        	if (val == email.value)
+        		alert('Email đã tồn tại, nhập một email khác !!');
+        		return false;
+      });
+        
+	  if (!name.checkValidity()){
+		    alert('Tên khách hàng là bắt buộc !!');
+		    return false;
+	  }
+	  if (!regSDT.test(phone.value)) {
+		    alert('SDT ko hợp lệ !!');
+		    return false;
+	  }
+	  if (!email.checkValidity()){
+		    alert('Email không hợp lệ !!');
+		    return false;
+	  }
+	  if (!regUser.test(user.value)){
+		  alert('Tài khoản không hợp lệ !! (8-32 Ko chứa kí tự đặc biệt)');
+		  return false;
+	  }
+	  if (!addr.checkValidity()){
+	    alert('Địa chỉ là bắt buộc !!');
+	    return false;
+	  }
+	  if (!regUser.test(pass.value)){
+	    alert('Mật khẩu không hợp lệ !!');
+	    return false;
+	  } 
+	  return true;
+} 
 </script>
 </body>
 </html>

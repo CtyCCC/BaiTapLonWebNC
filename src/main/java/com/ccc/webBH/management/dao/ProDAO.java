@@ -22,7 +22,7 @@ public class ProDAO {
 	}
 	
 	public ArrayList<Product> getAllPro(){
-		String sql = "select * from Product";
+		String sql = "select * from Product order by supplier";
 		return (ArrayList<Product>) template.query(sql, new RowMapper<Product>() {
 			public Product mapRow(ResultSet rs, int row) throws SQLException {
 				Product p = new Product(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
@@ -45,12 +45,12 @@ public class ProDAO {
 	
 	public int updatePro (Product pro) {
 		
-		String sql = "update Product set namePro = '"+pro.getNamePro()+
+		String sql = "update Product set namePro = N'"+pro.getNamePro()+
 									"', publicationYear = "+pro.getPublicationYear()+
-									", supplier = '"+pro.getSupplier()+
+									", supplier = N'"+pro.getSupplier()+
 									"', typee = '"+pro.getType()+
 									"', price = "+pro.getPrice()+
-									", descriptions = '"+pro.getDes()+
+									", descriptions = N'"+pro.getDes()+
 									"', urlImage = '"+pro.getUrlImage()+"' where idPro = '"+pro.getIdPro()+"'";
 		
 		int kq = 0;
