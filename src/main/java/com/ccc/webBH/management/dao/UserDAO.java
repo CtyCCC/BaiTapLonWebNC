@@ -5,10 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.webBH.login.entity.AccountMapper;
 import com.ccc.webBH.management.entiy.Account;
 
 @Repository
@@ -107,6 +109,17 @@ public class UserDAO {
 				return email;
 			}
 		});
+	}
+	
+	public Account geAccbytUserName(String username) throws EmptyResultDataAccessException{
+		String sql = "select * from Account  where userName = ?";
+		AccountMapper accmapper =new AccountMapper();
+		return template.queryForObject(sql,new Object[] {username},accmapper);
+	}
+	public Account  getAccbyEmail(String email) throws EmptyResultDataAccessException{
+		String sql = "select * from Account where email = ?";
+		AccountMapper accmapper = new AccountMapper();
+		return template.queryForObject(sql,new Object[] {email},accmapper );
 	}
 	
 }

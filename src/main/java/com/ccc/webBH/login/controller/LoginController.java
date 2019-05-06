@@ -1,10 +1,14 @@
 package com.ccc.webBH.login.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,13 +44,40 @@ public class LoginController {
 		return "login";
 	}
 	
+	@GetMapping("/signup")
+	public String sigupget() {
+		return "login";
+	}
+	
 	@PostMapping("/signup")
-	public String sigup(@ModelAttribute("account") Account acc,HttpServletRequest req) {
+	public String sigup(@ModelAttribute("account") Account acc,Model model,HttpServletRequest req){
 		acc.setCode("CUS");
 		acc.setIdAcc("not");
-		userdao.addNew(acc);
-		authenticateUserAndSetSession(acc,req);
-		return "redirect:/";
+		int error =0;
+		ArrayList<String> listuser = userdao.getAllUserName();
+		ArrayList<String> listmail = userdao.getAllEmail();
+			
+		for (String user : listuser) {
+			if(user.equals(acc.getUserName())) {
+				model.addAttribute("errorusername","Username đã được sử dụng");
+				error++;
+			}
+		}
+		
+		for (String email : listmail) {
+			if(email.equals(acc.getEmail())) {
+				model.addAttribute("erroremail","Email này đã được sử dụng");
+				error++;
+			}
+		}
+		if(error == 0) {
+			userdao.addNew(acc);
+			authenticateUserAndSetSession(acc,req);
+			return "redirect:/";
+		}else{
+			model.addAttribute("open","block");
+		}
+		return "login";
 	}
 	
 	@GetMapping("/LoginError")

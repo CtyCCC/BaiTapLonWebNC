@@ -6,11 +6,11 @@ $(document).ready(function(e) {
 
     $("#kt").validate({
         rules:{
-            txtuser:{
+        	userName:{
                 required:true,
-                user: true,
+                
             },
-            txtpass:{
+            pass:{
                 required: true,
                 minlength: 8,
                 maxlength: 32,
@@ -19,17 +19,17 @@ $(document).ready(function(e) {
                 required:true,
                 equalTo: "#pass",
             },
-            txtten:{
+            nameCus:{
                 required:true
             },
-            txtsdt:{
+            phone:{
                 required: true,
                 number: true,
                 digits: true,
                 maxlength: 10,
                 minlength: 10,
             },
-            txtmail:{
+            email:{
                 required: true,
                 email: true,
             },
