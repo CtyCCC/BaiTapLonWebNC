@@ -62,7 +62,7 @@ ALTER TABLE Account ADD FOREIGN KEY (code) REFERENCES Roles (code);
 insert into Roles values('ADM','ROLE_ADMIN')
 insert into Roles values('CUS','ROLE_CUSTOMMER')
 
-insert into Account values('ACC33','ADM','admin1','123',N'Nguyễn Văn Mạnh Cường','nvmcuong97@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
+insert into Account values('ACC33','ADM','admin1','123',N'Nguyễn Văn Mạnh Cường','cuongfbi1314@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
 insert into Account values('ACC1','ADM','admin2','123',N'Nguyễn Văn Mạnh Cường','nvmcuong97@gmail.com',1,'0794343226',N'Liên khu 4-5 Bình Tân')
 insert into Account values('ACC2','ADM','admin3','123',N'Trần Đình Chiến','dckool@gmail.com',1,'0794343226',N'Quang Trung Gò Vấp')
 insert into Account values('ACC3','CUS','hcuong','123',N'Trần Hùng Cường','hungcuong97@gmail.com',1,'0794343226',N'Nguyễn Oanh Gò Vấp')

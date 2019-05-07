@@ -8,6 +8,7 @@ $(document).ready(function(e) {
         rules:{
         	userName:{
                 required:true,
+                user: true 
                 
             },
             pass:{
